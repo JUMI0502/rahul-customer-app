@@ -2435,7 +2435,10 @@ function OrdersTab({ customer, onCancelOrder }) {
 
                 {order.status !== 'collected' && (
                   <View style={os.qrSection}>
-                    <Text style={os.qrTitle}>📱 Show QR at Pickup</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                      <Ionicons name="phone-portrait-outline" size={13} color="rgba(255,255,255,0.4)" />
+                      <Text style={os.qrTitle}>Show QR at Pickup</Text>
+                    </View>
                     <Image
                       source={{ uri: qrUrl }}
                       style={os.qrImage}
