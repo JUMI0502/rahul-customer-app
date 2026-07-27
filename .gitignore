@@ -48,3 +48,4 @@ eslint-check.config.mjs
 *.backup*
 fix_*.py
 eslint-check.config.mjs
+*.final_backup
