@@ -948,8 +948,10 @@ export default function MainApp({
               <Text style={s.activeFilterText}>
                 Showing: {CATEGORIES.find(c => c.id === category)?.label || category}
               </Text>
-              <TouchableOpacity onPress={() => setCategory('all')}>
-                <Text style={s.clearFilterBtn}>Clear ✕</Text>
+              <TouchableOpacity onPress={() => setCategory('all')}
+                style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                <Text style={s.clearFilterBtn}>Clear</Text>
+                <Ionicons name="close" size={13} color={s.clearFilterBtn.color || '#fff'} />
               </TouchableOpacity>
             </View>
           )}
@@ -1305,12 +1307,19 @@ export default function MainApp({
                       <Text style={s.productSku}>{item.sku}</Text>
                       <View style={[s.stockBadge,
                         item.stock_qty === 0 && s.stockBadgeOut]}>
-                        <Text style={[s.stockText,
-                          item.stock_qty === 0 && s.stockTextOut]}>
-                          {item.stock_qty > 0
-                            ? `✅ ${item.stock_qty} in stock`
-                            : '❌ Out of stock'}
-                        </Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                          <Ionicons
+                            name={item.stock_qty > 0 ? 'checkmark-circle' : 'close-circle'}
+                            size={12}
+                            color={item.stock_qty > 0 ? (s.stockText.color || '#4ADE80') : (s.stockTextOut.color || '#EF4444')}
+                          />
+                          <Text style={[s.stockText,
+                            item.stock_qty === 0 && s.stockTextOut]}>
+                            {item.stock_qty > 0
+                              ? `${item.stock_qty} in stock`
+                              : 'Out of stock'}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                   </View>
@@ -1318,9 +1327,11 @@ export default function MainApp({
                     <TouchableOpacity
                       onPress={() => toggleFavorite(item.id)}
                     >
-                      <Text style={{ fontSize: 18 }}>
-                        {favorites.includes(item.id) ? '❤️' : '🤍'}
-                      </Text>
+                      <Ionicons
+                        name={favorites.includes(item.id) ? 'heart' : 'heart-outline'}
+                        size={18}
+                        color={favorites.includes(item.id) ? '#EF4444' : 'rgba(255,255,255,0.3)'}
+                      />
                     </TouchableOpacity>
                     <TouchableOpacity
                       onPress={() => shareProduct(item)}
