@@ -1996,9 +1996,16 @@ export default function MainApp({
                 <Text style={s.heroIcon}>
                   {getIcon(selectedProduct.sku)}
                 </Text>
-                <View style={[s.oemBadge, { flexDirection: 'row', alignItems: 'center', gap: 5 }]}>
-                  <Ionicons name="checkmark-circle" size={13} color={s.oemText.color || '#4ADE80'} />
-                  <Text style={s.oemText}>Original OEM</Text>
+                <View style={[s.oemBadge, { flexDirection: 'row', alignItems: 'center', gap: 5 },
+                  !selectedProduct.is_oem && { backgroundColor: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)' }]}>
+                  <Ionicons
+                    name={selectedProduct.is_oem ? 'checkmark-circle' : 'information-circle-outline'}
+                    size={13}
+                    color={selectedProduct.is_oem ? (s.oemText.color || '#4ADE80') : 'rgba(255,255,255,0.5)'}
+                  />
+                  <Text style={[s.oemText, !selectedProduct.is_oem && { color: 'rgba(255,255,255,0.5)' }]}>
+                    {selectedProduct.is_oem ? 'Original OEM' : 'Generic / Compatible Part'}
+                  </Text>
                 </View>
               </View>
               <View style={{ padding: 20 }}>
