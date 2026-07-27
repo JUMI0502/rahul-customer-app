@@ -208,7 +208,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           {vehicle && (
             <View style={s.summaryVehicle}>
               <Text style={s.summaryVehicleText}>
-                🏍️ {vehicle.brand} {vehicle.model}
+                {vehicle.brand} {vehicle.model}
               </Text>
             </View>
           )}
@@ -312,7 +312,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           <Text style={s.cardTitle}>Payment Details</Text>
 
           <Text style={s.paymentNote}>
-            💡 Add your UPI ID so staff can send payment requests directly
+            Add your UPI ID so staff can send payment requests directly
           </Text>
 
           <Text style={s.label}>UPI ID</Text>
@@ -462,7 +462,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
         {/* EDIT HINT */}
         {!editing && (
           <Text style={s.editHint}>
-            Tap ✏️ Edit to update your details
+            Tap Edit to update your details
           </Text>
         )}
 

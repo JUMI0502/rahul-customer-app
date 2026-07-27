@@ -73,7 +73,7 @@ const QUESTIONS = [
 
 const getHealthData = (score) => {
   if (score >= 80) return {
-    label: 'Excellent! 🌟',
+    label: 'Excellent!',
     color: '#4ADE80',
     bg: 'rgba(74,222,128,0.1)',
     desc: 'Your bike is in great condition! Keep it up!',
@@ -81,7 +81,7 @@ const getHealthData = (score) => {
     parts: []
   };
   if (score >= 60) return {
-    label: 'Good 👍',
+    label: 'Good',
     color: '#4F6EF7',
     bg: 'rgba(79,110,247,0.1)',
     desc: 'Minor maintenance needed soon.',
@@ -89,7 +89,7 @@ const getHealthData = (score) => {
     parts: ['Engine Oil', 'Chain Lubricant']
   };
   if (score >= 40) return {
-    label: 'Needs Attention ⚠️',
+    label: 'Needs Attention',
     color: '#FFC107',
     bg: 'rgba(255,193,7,0.1)',
     desc: 'Several parts need replacement soon!',
@@ -97,7 +97,7 @@ const getHealthData = (score) => {
     parts: ['Brake Shoes', 'Engine Oil', 'Air Filter', 'Chain']
   };
   return {
-    label: 'Critical! 🚨',
+    label: 'Critical!',
     color: '#FF4757',
     bg: 'rgba(255,71,87,0.1)',
     desc: 'Your bike needs urgent service!',
@@ -313,7 +313,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
           {health.parts.length > 0 && (
             <View style={s.partsCard}>
               <Text style={s.partsTitle}>
-                🔧 Recommended Parts
+                Recommended Parts
               </Text>
               <Text style={s.partsSub}>
                 Based on your answers, get these checked:
@@ -335,7 +335,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
                 onPress={onBrowseParts}
               >
                 <Text style={s.shopBtnText}>
-                  🛒 Browse These Parts →
+                  Browse These Parts →
                 </Text>
               </TouchableOpacity>
             </View>
@@ -359,7 +359,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
             onPress={reset}
           >
             <Text style={s.retakeBtnText}>
-              🔄 Take Test Again
+              Take Test Again
             </Text>
           </TouchableOpacity>
 
