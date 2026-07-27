@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
+import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');
 const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
@@ -115,19 +116,21 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             <View style={s.shieldWrap}>
               <View style={s.shield}>
                 <Text style={s.shieldRAS}>RAS</Text>
-                <Text style={s.shieldBike}>🏍️</Text>
               </View>
             </View>
             <Text style={s.heroTagline}>YOUR TRUSTED SPARES PARTNER</Text>
             <Text style={s.heroName}>New Rahul Auto Spares</Text>
-            <Text style={s.heroLocation}>📍 Telugu Peta, Nandyal · Est. 2002</Text>
+            <View style={s.heroLocationRow}>
+              <Ionicons name="location-outline" size={13} color="rgba(255,255,255,0.4)" />
+              <Text style={s.heroLocation}>Telugu Peta, Nandyal · Est. 2002</Text>
+            </View>
 
             {/* STATS ROW */}
             <View style={s.statsRow}>
               {[
                 { num: '500+', label: 'Products' },
                 { num: '20+', label: 'Bike Models' },
-                { num: '5★', label: 'Rating' },
+                { num: '5.0', label: 'Rating' },
               ].map((stat, i) => (
                 <View key={i} style={s.statBox}>
                   <Text style={s.statNum}>{stat.num}</Text>
@@ -143,14 +146,14 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
           {/* CUSTOMER CARD */}
           <TouchableOpacity style={s.roleCard} onPress={() => goToMode('customer')} activeOpacity={0.8}>
             <View style={[s.roleIconBox, { backgroundColor: 'rgba(79,110,247,0.12)' }]}>
-              <Text style={s.roleIconEmoji}>🛍️</Text>
+              <Ionicons name="bag-handle-outline" size={26} color="#4F6EF7" />
             </View>
             <View style={s.roleInfo}>
               <Text style={s.roleTitle}>Customer</Text>
               <Text style={s.roleSub}>Browse · Order · Track</Text>
               <Text style={s.roleTe}>స్పేర్ పార్ట్స్ కొనండి</Text>
               <View style={s.roleTagRow}>
-                {['Free', 'All Bikes', 'Fast Pickup'].map((tag, i) => (
+                {['Free Account', 'All Bikes', 'Fast Pickup'].map((tag, i) => (
                   <View key={i} style={[s.roleTag, { backgroundColor: 'rgba(79,110,247,0.1)' }]}>
                     <Text style={[s.roleTagText, { color: '#4F6EF7' }]}>{tag}</Text>
                   </View>
@@ -158,44 +161,37 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               </View>
             </View>
             <View style={s.roleArrow}>
-              <Text style={s.roleArrowText}>→</Text>
+              <Ionicons name="chevron-forward" size={18} color="#4F6EF7" />
             </View>
           </TouchableOpacity>
 
           {/* MECHANIC CARD */}
           <TouchableOpacity style={[s.roleCard, s.mechCard]} onPress={() => goToMode('mechanic')} activeOpacity={0.8}>
             <View style={[s.roleIconBox, { backgroundColor: 'rgba(255,193,7,0.12)' }]}>
-              <Text style={s.roleIconEmoji}>🔧</Text>
+              <Ionicons name="construct-outline" size={26} color="#FFC107" />
             </View>
             <View style={s.roleInfo}>
-              <Text style={[s.roleTitle, { color: '#FFC107' }]}>Mechanic</Text>
-              <Text style={s.roleSub}>Wholesale Prices · 5% Discount</Text>
-              <Text style={s.roleTe}>మెకానిక్ ఖాతా · 5% తగ్గింపు</Text>
-              <View style={s.roleTagRow}>
-                {['5% OFF', 'Wholesale', 'Priority'].map((tag, i) => (
-                  <View key={i} style={[s.roleTag, { backgroundColor: 'rgba(255,193,7,0.1)' }]}>
-                    <Text style={[s.roleTagText, { color: '#FFC107' }]}>{tag}</Text>
-                  </View>
-                ))}
-              </View>
+              <Text style={[s.roleTitle, { color: '#FFC107' }]}>Mechanic / Trade</Text>
+              <Text style={s.roleSub}>For garages and workshops</Text>
+              <Text style={s.roleTe}>మెకానిక్ ఖాతా</Text>
             </View>
             <View style={[s.roleArrow, { backgroundColor: 'rgba(255,193,7,0.1)' }]}>
-              <Text style={[s.roleArrowText, { color: '#FFC107' }]}>→</Text>
+              <Ionicons name="chevron-forward" size={18} color="#FFC107" />
             </View>
           </TouchableOpacity>
 
           {/* STORE INFO */}
           <View style={s.storeInfoBox}>
             <View style={s.storeInfoRow}>
-              <Text style={s.storeInfoIcon}>🕐</Text>
+              <Ionicons name="time-outline" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
               <Text style={s.storeInfoText}>Mon–Sat: 10AM–9PM · Sun: 10AM–3PM</Text>
             </View>
             <View style={s.storeInfoRow}>
-              <Text style={s.storeInfoIcon}>📞</Text>
+              <Ionicons name="call-outline" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
               <Text style={s.storeInfoText}>08514-244944</Text>
             </View>
             <View style={s.storeInfoRow}>
-              <Text style={s.storeInfoIcon}>💬</Text>
+              <Ionicons name="logo-whatsapp" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
               <Text style={s.storeInfoText}>WhatsApp: +91 6300281504</Text>
             </View>
           </View>
@@ -217,13 +213,14 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
           <ScrollView contentContainerStyle={s.formScroll} keyboardShouldPersistTaps="handled">
 
             <TouchableOpacity style={s.backBtn} onPress={() => setMode('select')}>
-              <Text style={s.backBtnText}>← Back</Text>
+              <Ionicons name="arrow-back" size={14} color="rgba(255,255,255,0.6)" />
+              <Text style={s.backBtnText}>Back</Text>
             </TouchableOpacity>
 
             {/* HEADER */}
             <View style={s.formHeader}>
               <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(79,110,247,0.1)', borderColor: 'rgba(79,110,247,0.3)' }]}>
-                <Text style={{ fontSize: 36 }}>🛍️</Text>
+                <Ionicons name="bag-handle-outline" size={32} color="#4F6EF7" />
               </View>
               <Text style={s.formTitle}>Customer Login</Text>
               <Text style={s.formSub}>Enter once · Saved for next time</Text>
@@ -235,7 +232,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
 
               <Text style={s.inputLabel}>FULL NAME</Text>
               <View style={s.inputRow}>
-                <Text style={s.inputIcon}>👤</Text>
+                <Ionicons name="person-outline" size={18} color="rgba(255,255,255,0.35)" />
                 <TextInput
                   style={s.inputField}
                   placeholder="e.g. Rahul Kumar"
@@ -255,20 +252,23 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
                   keyboardType="phone-pad" maxLength={10} />
               </View>
               {phone.length === 10 && (
-                <Text style={s.validText}>✅ Valid number</Text>
+                <View style={s.validRow}>
+                  <Ionicons name="checkmark-circle" size={14} color="#4ADE80" />
+                  <Text style={s.validText}>Valid number</Text>
+                </View>
               )}
             </View>
 
             {/* FEATURES */}
             <View style={s.featuresBox}>
               {[
-                { icon: '🏍️', text: 'Browse parts by your bike model' },
-                { icon: '📦', text: 'Track your order in real-time' },
-                { icon: '🔔', text: 'Get notified when order is ready' },
-                { icon: '💎', text: 'Earn loyalty points on every order' },
+                { icon: 'bicycle-outline', text: 'Browse parts by your bike model' },
+                { icon: 'cube-outline', text: 'Track your order in real-time' },
+                { icon: 'notifications-outline', text: 'Get notified when order is ready' },
+                { icon: 'diamond-outline', text: 'Earn loyalty points on every order' },
               ].map((f, i) => (
                 <View key={i} style={s.featureRow}>
-                  <Text style={s.featureIcon}>{f.icon}</Text>
+                  <Ionicons name={f.icon} size={19} color="rgba(255,255,255,0.5)" style={{ width: 26 }} />
                   <Text style={s.featureText}>{f.text}</Text>
                 </View>
               ))}
@@ -278,7 +278,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               style={[s.submitBtn, { backgroundColor: '#4F6EF7' }, (!name || phone.length < 10) && { opacity: 0.4 }]}
               onPress={handleCustomerLogin}
               disabled={!name || phone.length < 10}>
-              <Text style={s.submitBtnText}>🚀 Start Shopping</Text>
+              <Text style={s.submitBtnText}>Continue</Text>
             </TouchableOpacity>
 
             <View style={{ height: 40 }} />
@@ -299,12 +299,13 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
           <ScrollView contentContainerStyle={s.formScroll} keyboardShouldPersistTaps="handled">
 
             <TouchableOpacity style={s.backBtn} onPress={() => setMode('select')}>
-              <Text style={s.backBtnText}>← Back</Text>
+              <Ionicons name="arrow-back" size={14} color="rgba(255,255,255,0.6)" />
+              <Text style={s.backBtnText}>Back</Text>
             </TouchableOpacity>
 
             <View style={s.formHeader}>
               <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(255,193,7,0.1)', borderColor: 'rgba(255,193,7,0.3)' }]}>
-                <Text style={{ fontSize: 36 }}>🔧</Text>
+                <Ionicons name="construct-outline" size={32} color="#FFC107" />
               </View>
               <Text style={[s.formTitle, { color: '#FFC107' }]}>Mechanic Login</Text>
               <Text style={s.formSub}>Check your approved account</Text>
@@ -312,15 +313,15 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
 
             {/* BENEFITS */}
             <View style={s.mechBenefitsCard}>
-              <Text style={s.mechBenefitsTitle}>🎁 Mechanic Benefits</Text>
+              <Text style={s.mechBenefitsTitle}>Mechanic Account Benefits</Text>
               {[
-                { icon: '💰', text: '5% discount on all parts' },
-                { icon: '📦', text: 'Wholesale pricing for bulk orders' },
-                { icon: '⚡', text: 'Priority order processing' },
-                { icon: '📱', text: 'Dedicated mechanic support' },
+                { icon: 'pricetag-outline', text: 'Trade discount on all parts' },
+                { icon: 'cube-outline', text: 'Wholesale pricing for bulk orders' },
+                { icon: 'flash-outline', text: 'Priority order processing' },
+                { icon: 'headset-outline', text: 'Dedicated mechanic support' },
               ].map((b, i) => (
                 <View key={i} style={s.mechBenefitRow}>
-                  <Text style={s.mechBenefitIcon}>{b.icon}</Text>
+                  <Ionicons name={b.icon} size={18} color="#FFC107" style={{ width: 26 }} />
                   <Text style={s.mechBenefitText}>{b.text}</Text>
                 </View>
               ))}
@@ -346,7 +347,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               disabled={phone.length < 10 || loading}>
               {loading
                 ? <ActivityIndicator color="#07111F" />
-                : <Text style={[s.submitBtnText, { color: '#07111F' }]}>🔍 Check My Account</Text>}
+                : <Text style={[s.submitBtnText, { color: '#07111F' }]}>Check My Account</Text>}
             </TouchableOpacity>
 
             <View style={s.divider}>
@@ -358,7 +359,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             <TouchableOpacity
               style={[s.outlineBtn, { borderColor: 'rgba(255,193,7,0.3)' }]}
               onPress={() => goToMode('mechanic_register')}>
-              <Text style={[s.outlineBtnText, { color: '#FFC107' }]}>📝 Register as New Mechanic</Text>
+              <Text style={[s.outlineBtnText, { color: '#FFC107' }]}>Register as New Mechanic</Text>
             </TouchableOpacity>
 
             <View style={{ height: 40 }} />
@@ -378,12 +379,13 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
         <ScrollView contentContainerStyle={s.formScroll} keyboardShouldPersistTaps="handled">
 
           <TouchableOpacity style={s.backBtn} onPress={() => goToMode('mechanic')}>
-            <Text style={s.backBtnText}>← Back</Text>
+            <Ionicons name="arrow-back" size={14} color="rgba(255,255,255,0.6)" />
+            <Text style={s.backBtnText}>Back</Text>
           </TouchableOpacity>
 
           <View style={s.formHeader}>
             <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(255,193,7,0.1)', borderColor: 'rgba(255,193,7,0.3)' }]}>
-              <Text style={{ fontSize: 36 }}>📝</Text>
+              <Ionicons name="document-text-outline" size={32} color="#FFC107" />
             </View>
             <Text style={[s.formTitle, { color: '#FFC107' }]}>Register as Mechanic</Text>
             <Text style={s.formSub}>Fill details · Owner will approve you!</Text>
@@ -393,15 +395,17 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             <Text style={s.inputCardTitle}>Your Details</Text>
 
             {[
-              { label: 'FULL NAME *', icon: '🔧', value: name, setter: setName, placeholder: 'Your full name', caps: 'words' },
-              { label: 'PHONE NUMBER *', icon: '+91', value: phone, setter: setPhone, placeholder: '10-digit number', keyboard: 'phone-pad', max: 10 },
-              { label: 'GARAGE / SHOP NAME', icon: '🏪', value: shopName, setter: setShopName, placeholder: 'Your shop name (optional)', caps: 'words' },
-              { label: 'AREA IN NANDYAL', icon: '📍', value: area, setter: setArea, placeholder: 'Your area (optional)', caps: 'words' },
+              { label: 'FULL NAME *', icon: 'person-outline', value: name, setter: setName, placeholder: 'Your full name', caps: 'words' },
+              { label: 'PHONE NUMBER *', icon: null, value: phone, setter: setPhone, placeholder: '10-digit number', keyboard: 'phone-pad', max: 10 },
+              { label: 'GARAGE / SHOP NAME', icon: 'storefront-outline', value: shopName, setter: setShopName, placeholder: 'Your shop name (optional)', caps: 'words' },
+              { label: 'AREA IN NANDYAL', icon: 'location-outline', value: area, setter: setArea, placeholder: 'Your area (optional)', caps: 'words' },
             ].map((field, i) => (
               <View key={i} style={{ marginBottom: 14 }}>
                 <Text style={s.inputLabel}>{field.label}</Text>
                 <View style={[s.inputRow, { borderColor: 'rgba(255,193,7,0.25)' }]}>
-                  <Text style={s.inputIcon}>{field.icon}</Text>
+                  {field.icon
+                    ? <Ionicons name={field.icon} size={18} color="rgba(255,255,255,0.35)" />
+                    : <Text style={s.inputIcon}>+91</Text>}
                   <TextInput
                     style={s.inputField}
                     placeholder={field.placeholder}
@@ -421,18 +425,20 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             disabled={!name || phone.length < 10 || loading}>
             {loading
               ? <ActivityIndicator color="#07111F" />
-              : <Text style={[s.submitBtnText, { color: '#07111F' }]}>🔧 Submit for Approval</Text>}
+              : <Text style={[s.submitBtnText, { color: '#07111F' }]}>Submit for Approval</Text>}
           </TouchableOpacity>
 
           <View style={s.approvalCard}>
             <Text style={s.approvalTitle}>What happens next?</Text>
             {[
-              { icon: '1️⃣', text: 'Your request is sent to the store owner' },
-              { icon: '2️⃣', text: 'Owner reviews and approves within 24 hours' },
-              { icon: '3️⃣', text: 'You get 5% discount on all parts!' },
+              { num: '1', text: 'Your request is sent to the store owner' },
+              { num: '2', text: 'Owner reviews and approves within 24 hours' },
+              { num: '3', text: 'Your trade account is activated' },
             ].map((step, i) => (
               <View key={i} style={s.approvalStep}>
-                <Text style={s.approvalStepIcon}>{step.icon}</Text>
+                <View style={s.approvalStepNum}>
+                  <Text style={s.approvalStepNumText}>{step.num}</Text>
+                </View>
                 <Text style={s.approvalStepText}>{step.text}</Text>
               </View>
             ))}
@@ -464,10 +470,10 @@ const s = StyleSheet.create({
     shadowOpacity: 0.3, shadowRadius: 8, elevation: 8,
   },
   shieldRAS: { fontSize: 28, fontWeight: 'bold', color: '#fff', letterSpacing: 4 },
-  shieldBike: { fontSize: 22 },
   heroTagline: { fontSize: 9, color: '#C9A84C', letterSpacing: 4, marginBottom: 6 },
   heroName: { fontSize: 20, fontWeight: 'bold', color: '#fff', marginBottom: 4, textAlign: 'center' },
-  heroLocation: { fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 20 },
+  heroLocationRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 20 },
+  heroLocation: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
 
   // Stats
   statsRow: {
@@ -503,7 +509,6 @@ const s = StyleSheet.create({
     width: 56, height: 56, borderRadius: 16,
     alignItems: 'center', justifyContent: 'center',
   },
-  roleIconEmoji: { fontSize: 28 },
   roleInfo: { flex: 1 },
   roleTitle: { fontSize: 18, fontWeight: 'bold', color: '#fff', marginBottom: 2 },
   roleSub: { fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 2 },
@@ -516,7 +521,6 @@ const s = StyleSheet.create({
     backgroundColor: 'rgba(79,110,247,0.1)',
     alignItems: 'center', justifyContent: 'center',
   },
-  roleArrowText: { fontSize: 18, color: '#4F6EF7', fontWeight: 'bold' },
 
   // Store info
   storeInfoBox: {
@@ -525,7 +529,7 @@ const s = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.06)', gap: 10,
   },
   storeInfoRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  storeInfoIcon: { fontSize: 16, width: 24 },
+  storeInfoIcon: { width: 24 },
   storeInfoText: { fontSize: 12, color: 'rgba(255,255,255,0.4)', flex: 1 },
 
   // Form screens
@@ -534,6 +538,7 @@ const s = StyleSheet.create({
     backgroundColor: 'rgba(255,255,255,0.06)', alignSelf: 'flex-start',
     borderRadius: 20, paddingHorizontal: 16, paddingVertical: 8,
     borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)', marginBottom: 24,
+    flexDirection: 'row', alignItems: 'center', gap: 6,
   },
   backBtnText: { color: 'rgba(255,255,255,0.6)', fontSize: 13, fontWeight: 'bold' },
 
@@ -565,7 +570,8 @@ const s = StyleSheet.create({
   },
   inputIcon: { fontSize: 15, color: 'rgba(255,255,255,0.35)', fontWeight: 'bold', minWidth: 28 },
   inputField: { flex: 1, color: '#fff', fontSize: 16 },
-  validText: { fontSize: 11, color: '#4ADE80', marginTop: 6, marginLeft: 4 },
+  validRow: { flexDirection: 'row', alignItems: 'center', gap: 5, marginTop: 6, marginLeft: 4 },
+  validText: { fontSize: 11, color: '#4ADE80' },
 
   // Features box
   featuresBox: {
@@ -574,7 +580,6 @@ const s = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0.06)', gap: 12,
   },
   featureRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  featureIcon: { fontSize: 20, width: 28 },
   featureText: { fontSize: 13, color: 'rgba(255,255,255,0.6)', flex: 1 },
 
   // Submit button
@@ -594,7 +599,6 @@ const s = StyleSheet.create({
   },
   mechBenefitsTitle: { fontSize: 14, fontWeight: 'bold', color: '#FFC107', marginBottom: 12 },
   mechBenefitRow: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 8 },
-  mechBenefitIcon: { fontSize: 18, width: 26 },
   mechBenefitText: { fontSize: 13, color: 'rgba(255,255,255,0.6)', flex: 1 },
 
   // Divider
@@ -615,7 +619,12 @@ const s = StyleSheet.create({
     padding: 14, borderWidth: 1, borderColor: 'rgba(255,193,7,0.15)',
   },
   approvalTitle: { fontSize: 13, fontWeight: 'bold', color: '#FFC107', marginBottom: 12 },
-  approvalStep: { flexDirection: 'row', gap: 10, alignItems: 'flex-start', marginBottom: 10 },
-  approvalStepIcon: { fontSize: 18 },
+  approvalStep: { flexDirection: 'row', gap: 10, alignItems: 'center', marginBottom: 10 },
+  approvalStepNum: {
+    width: 22, height: 22, borderRadius: 11,
+    backgroundColor: 'rgba(255,193,7,0.15)',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  approvalStepNumText: { fontSize: 11, fontWeight: 'bold', color: '#FFC107' },
   approvalStepText: { fontSize: 13, color: 'rgba(255,255,255,0.6)', flex: 1, lineHeight: 20 },
 });

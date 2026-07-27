@@ -228,7 +228,6 @@ export default function MainApp({
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [loyaltyPoints, setLoyaltyPoints] = useState(0);
   const placingOrderRef = useRef(false);
-  const [applyPoints, setApplyPoints] = useState(false);
   const [rewards, setRewards] = useState([]);
   const [showRewards, setShowRewards] = useState(false);
   const [pickupTime, setPickupTime] = useState('');
@@ -583,18 +582,6 @@ export default function MainApp({
             setShowConfetti(true);
             setTimeout(() => setShowConfetti(false), 3500);
 
-            if (applyPoints && pointsDiscount > 0) {
-              fetch(
-                `${API_URL}/loyalty/${customer?.phone}/redeem`,
-                {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ points: pointsDiscount })
-                }
-              ).catch(() => {});
-              setLoyaltyPoints(p => Math.max(0, p - pointsDiscount));
-            }
-
             const earned = Math.floor(finalTotal / 50);
             if (earned > 0) {
               fetch(
@@ -629,7 +616,6 @@ export default function MainApp({
             setCart([]);
             setOrderNote('');
             setPickupTime('');
-            setApplyPoints(false);
             setTab('orders');
           } catch (err) {
             placingOrderRef.current = false;
@@ -703,10 +689,7 @@ export default function MainApp({
       (i.mechanic_price || i.selling_price) * i.qty
     ), 0
   );
-  const pointsDiscount = applyPoints
-    ? Math.min(loyaltyPoints, Math.floor(cartTotal * 0.5))
-    : 0;
-  const finalTotal = Math.max(0, cartTotal - pointsDiscount);
+  const finalTotal = cartTotal;
   const cartCount = cart.reduce((s, i) => s + i.qty, 0);
   const unread = notifications.filter(n => !n.read).length;
 
@@ -1533,36 +1516,13 @@ export default function MainApp({
                 </View>
               ))}
 
-              {loyaltyPoints >= 10 && (
-                <TouchableOpacity
-                  style={[s.loyaltyToggle,
-                    applyPoints && s.loyaltyToggleOn]}
-                  onPress={async () => {
-                    await Haptics.impactAsync(
-                      Haptics.ImpactFeedbackStyle.Medium
-                    );
-                    setApplyPoints(!applyPoints);
-                  }}
-                >
-                  <Text style={s.loyaltyToggleText}>
-                    🎁 Use {loyaltyPoints} points
-                    = ₹{Math.min(
-                      loyaltyPoints,
-                      Math.floor(cartTotal * 0.5)
-                    )} off
-                  </Text>
-                  <View style={[s.toggleSwitch,
-                    applyPoints && s.toggleSwitchOn]}>
-                    <View style={[s.toggleKnob,
-                      applyPoints && s.toggleKnobOn]} />
-                  </View>
-                </TouchableOpacity>
-              )}
-
               <View style={s.pickupCard}>
-                <Text style={s.pickupTitle}>
-                  📅 Select Pickup Time
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <Ionicons name="calendar-outline" size={16} color="#fff" />
+                  <Text style={s.pickupTitle}>
+                    Select Pickup Time
+                  </Text>
+                </View>
                 <View style={s.pickupOptions}>
                   {[
                     'Today 11AM', 'Today 2PM', 'Today 5PM',
@@ -1598,17 +1558,6 @@ export default function MainApp({
                     ₹{cartTotal.toFixed(0)}
                   </Text>
                 </View>
-                {pointsDiscount > 0 && (
-                  <View style={s.summaryRow}>
-                    <Text style={s.summaryLabel}>
-                      🎁 Points Discount
-                    </Text>
-                    <Text style={[s.summaryValue,
-                      { color: '#4ADE80' }]}>
-                      -₹{pointsDiscount}
-                    </Text>
-                  </View>
-                )}
                 <View style={[s.summaryRow, s.summaryTotal]}>
                   <Text style={s.summaryTotalLabel}>TOTAL</Text>
                   <Text style={s.summaryTotalValue}>
