@@ -2191,7 +2191,7 @@ export default function MainApp({
       >
         <View style={s.ratingOverlay}>
           <View style={s.ratingCard}>
-            <Text style={s.ratingEmoji}>⭐</Text>
+            <Ionicons name="star" size={40} color="#FFC107" style={{ marginBottom: 8 }} />
             <Text style={s.ratingTitle}>Enjoying the App?</Text>
             <Text style={s.ratingTe}>
               మీ అనుభవం రేట్ చేయండి!
@@ -2207,9 +2207,11 @@ export default function MainApp({
                     setRatingStars(star);
                   }}
                 >
-                  <Text style={s.star}>
-                    {star <= ratingStars ? '⭐' : '☆'}
-                  </Text>
+                  <Ionicons
+                    name={star <= ratingStars ? 'star' : 'star-outline'}
+                    size={32}
+                    color="#FFC107"
+                  />
                 </TouchableOpacity>
               ))}
             </View>
@@ -2235,7 +2237,7 @@ export default function MainApp({
                 }}
               >
                 <Text style={s.submitRatingText}>
-                  Submit ⭐
+                  Submit
                 </Text>
               </TouchableOpacity>
             </View>
@@ -2258,10 +2260,10 @@ function OrdersTab({ customer, onCancelOrder }) {
   const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
 
   const STATUS_STEPS = [
-    { key: 'new', label: 'Placed', icon: '○', color: '#4F6EF7' },
-    { key: 'packing', label: 'Packing', icon: '📦', color: '#FFC107' },
-    { key: 'ready', label: 'Ready', icon: '◉', color: '#4ADE80' },
-    { key: 'collected', label: 'Done', icon: '🏁', color: 'rgba(255,255,255,0.3)' },
+    { key: 'new', label: 'Placed', icon: 'ellipse-outline', color: '#4F6EF7' },
+    { key: 'packing', label: 'Packing', icon: 'cube-outline', color: '#FFC107' },
+    { key: 'ready', label: 'Ready', icon: 'checkmark-circle-outline', color: '#4ADE80' },
+    { key: 'collected', label: 'Done', icon: 'flag-outline', color: 'rgba(255,255,255,0.3)' },
   ];
 
   const getStepIndex = (status) => {
@@ -2408,9 +2410,12 @@ function OrdersTab({ customer, onCancelOrder }) {
                           done && { backgroundColor: step.color + '20', borderColor: step.color },
                           current && { backgroundColor: step.color + '20', borderColor: step.color },
                           pending && { borderColor: 'rgba(255,255,255,0.1)' }]}>
-                          <Text style={[os.stepEmoji, pending && { opacity: 0.2 }]}>
-                            {done ? '✓' : step.icon}
-                          </Text>
+                          <Ionicons
+                            name={done ? 'checkmark' : step.icon}
+                            size={16}
+                            color={done ? '#4ADE80' : step.color}
+                            style={pending && { opacity: 0.2 }}
+                          />
                         </View>
                         <Text style={[os.stepLabel,
                           done && { color: '#4ADE80' },
