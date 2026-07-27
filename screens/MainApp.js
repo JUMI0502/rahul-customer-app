@@ -489,11 +489,11 @@ export default function MainApp({
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     await Share.share({
       message:
-        `🏍️ *${product.name_en}*\n` +
-        `✅ OEM Part · ${product.sku}\n` +
-        `💰 ₹${product.selling_price} (MRP ₹${product.mrp})\n` +
-        `🏪 New Rahul Auto Spares\n` +
-        `📍 Telugu Peta, Nandyal\n📞 08514-244944`,
+        `*${product.name_en}*\n` +
+        `OEM Part · ${product.sku}\n` +
+        `₹${product.selling_price} (MRP ₹${product.mrp})\n` +
+        `New Rahul Auto Spares\n` +
+        `Telugu Peta, Nandyal\n08514-244944`,
     });
   };
 
@@ -535,26 +535,26 @@ export default function MainApp({
 
     const msg =
       `━━━━━━━━━━━━━━━━━━━━\n` +
-      `🏪 *NEW RAHUL AUTO SPARES*\n` +
+      `*NEW RAHUL AUTO SPARES*\n` +
       `━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `📋 *NEW ORDER*${isMechanic ? ' · 🔧 MECHANIC' : ''}\n\n` +
-      `👤 *Customer:* ${customer?.name}\n` +
-      `📱 *Phone:* +91 ${customer?.phone}\n` +
-      `📅 *Pickup:* ${pickupTime}\n` +
-      (orderNote ? `📝 *Note:* ${orderNote}\n` : '') +
+      `*NEW ORDER*${isMechanic ? ' · MECHANIC' : ''}\n\n` +
+      `*Customer:* ${customer?.name}\n` +
+      `*Phone:* +91 ${customer?.phone}\n` +
+      `*Pickup:* ${pickupTime}\n` +
+      (orderNote ? `*Note:* ${orderNote}\n` : '') +
       `\n` +
-      `🛒 *Items Ordered:*\n` +
+      `*Items Ordered:*\n` +
       `${itemsList}\n\n` +
       `━━━━━━━━━━━━━━━━━━━━\n` +
-      `💰 *Total: ₹${finalTotal.toFixed(0)}*\n` +
+      `*Total: ₹${finalTotal.toFixed(0)}*\n` +
 
       `━━━━━━━━━━━━━━━━━━━━`;
 
     Alert.alert(
-      '🎉 Confirm Your Order',
+      'Confirm Your Order',
       `Total: ₹${finalTotal.toFixed(0)}\nPickup: ${pickupTime}`,
       [{
-        text: 'OK 🙏',
+        text: 'OK',
         onPress: async () => {
           try {
             const r = await fetch(`${API_URL}/orders`, {
@@ -598,7 +598,7 @@ export default function MainApp({
             placingOrderRef.current = false;
             await addNotification({
               type: 'order',
-              title: '✅ Order Placed!',
+              title: 'Order Placed!',
               body: `${d.custom_id} · ₹${finalTotal.toFixed(0)}`
             });
 
