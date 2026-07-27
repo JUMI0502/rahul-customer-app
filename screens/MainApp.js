@@ -232,6 +232,7 @@ export default function MainApp({
   const [showRewards, setShowRewards] = useState(false);
   const [pickupTime, setPickupTime] = useState('');
   const [orderNote, setOrderNote] = useState('');
+  const [referredByPhone, setReferredByPhone] = useState('');
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
   const [showRating, setShowRating] = useState(false);
@@ -565,7 +566,8 @@ export default function MainApp({
                 total_amount: finalTotal,
                 customer_name: customer?.name,
                 customer_phone: customer?.phone,
-                items: cart
+                items: cart,
+                referred_by_phone: referredByPhone.trim()
               })
             });
             const d = await r.json();
@@ -616,6 +618,7 @@ export default function MainApp({
             setCart([]);
             setOrderNote('');
             setPickupTime('');
+            setReferredByPhone('');
             setTab('orders');
           } catch (err) {
             placingOrderRef.current = false;
@@ -1539,6 +1542,19 @@ export default function MainApp({
                 </View>
               </View>
 
+              <View style={s.pickupCard}>
+                <Text style={s.pickupTitle}>Referred by a friend? (optional)</Text>
+                <TextInput
+                  style={s.orderNoteInput}
+                  placeholder="Friend's phone number"
+                  placeholderTextColor="rgba(255,255,255,0.2)"
+                  value={referredByPhone}
+                  onChangeText={setReferredByPhone}
+                  keyboardType="phone-pad"
+                  maxLength={10}
+                />
+              </View>
+
               <View style={s.summaryCard}>
                 <View style={s.summaryRow}>
                   <Text style={s.summaryLabel}>
@@ -1812,6 +1828,25 @@ export default function MainApp({
               <Text style={s.rewardsSummaryHint}>
                 Earn 1 point for every ₹50 spent
               </Text>
+            </View>
+
+            {/* REFER A FRIEND */}
+            <View style={s.rewardsSummaryCard}>
+              <Ionicons name="people" size={28} color="#4F6EF7" />
+              <Text style={[s.rewardsSummaryLabel, { marginTop: 8 }]}>REFER A FRIEND</Text>
+              <Text style={s.rewardsSummaryHint}>
+                Share your phone number with friends. When they place their first order and mention it,
+                you both get bonus points automatically!
+              </Text>
+              <TouchableOpacity
+                style={[s.confirmWaBtn, { marginTop: 14, backgroundColor: '#4F6EF7' }]}
+                onPress={() => {
+                  const msg = `Hey! Check out New Rahul Auto Spares for genuine bike parts in Nandyal. Mention my number ${customer?.phone} when you order for a bonus!`;
+                  Linking.openURL(`https://wa.me/?text=${encodeURIComponent(msg)}`);
+                }}>
+                <Ionicons name="share-social-outline" size={18} color="#fff" />
+                <Text style={s.confirmWaBtnText}>Share with Friends</Text>
+              </TouchableOpacity>
             </View>
 
             <Text style={s.rewardsSectionTitle}>AVAILABLE REWARDS</Text>
