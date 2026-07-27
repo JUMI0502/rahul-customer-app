@@ -793,27 +793,30 @@ export default function MainApp({
             NEW RAHUL AUTO SPARES
           </Text>
           {offline && (
-            <Text style={s.offlineTag}>📴 Offline mode</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <Ionicons name="cloud-offline-outline" size={11} color={s.offlineTag.color || '#EF4444'} />
+              <Text style={s.offlineTag}>Offline mode</Text>
+            </View>
           )}
         </View>
         <View style={s.headerRight}>
           {isMechanic && (
-            <View style={s.mechanicTag}>
-              <Text style={s.mechanicTagText}>🔧 5%</Text>
+            <View style={[s.mechanicTag, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+              <Ionicons name="construct" size={11} color={s.mechanicTagText.color || '#FFC107'} />
+              <Text style={s.mechanicTagText}>5%</Text>
             </View>
           )}
           {loyaltyPoints > 0 && (
-            <View style={s.pointsTag}>
-              <Text style={s.pointsTagText}>
-                💎{loyaltyPoints}
-              </Text>
+            <View style={[s.pointsTag, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
+              <Ionicons name="diamond-outline" size={11} color={s.pointsTagText.color || '#4F6EF7'} />
+              <Text style={s.pointsTagText}>{loyaltyPoints}</Text>
             </View>
           )}
           <TouchableOpacity
             style={s.notifBtn}
             onPress={() => setShowNotifs(true)}
           >
-            <Text style={s.notifIcon}>🔔</Text>
+            <Ionicons name="notifications-outline" size={20} color={s.notifIcon.color || '#fff'} />
             {unread > 0 && (
               <View style={s.notifBadge}>
                 <Text style={s.notifBadgeText}>{unread}</Text>
