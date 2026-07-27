@@ -18,6 +18,13 @@ import FlashDealBanner from '../components/FlashDealBanner';
 
 const { width } = Dimensions.get('window');
 const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
+
+// ── FEATURE FLAG: DELIVERY ──
+// Set to true to enable the "Deliver to me" checkbox at checkout.
+// This only captures the customer's preference on the order (delivery_requested: true/false) -
+// it does NOT yet include delivery fee, radius restriction, or rider assignment logic.
+// Those need to be designed and built once delivery is actually ready to launch.
+const DELIVERY_ENABLED = false;
 const WHATSAPP = '916300281504';
 const STORE_UPI = 'rahulautospares@paytm';
 const PRODUCTS_KEY = 'products_cache_v4';
@@ -233,6 +240,7 @@ export default function MainApp({
   const [pickupTime, setPickupTime] = useState('');
   const [orderNote, setOrderNote] = useState('');
   const [referredByPhone, setReferredByPhone] = useState('');
+  const [deliveryRequested, setDeliveryRequested] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
   const [showRating, setShowRating] = useState(false);
@@ -567,7 +575,8 @@ export default function MainApp({
                 customer_name: customer?.name,
                 customer_phone: customer?.phone,
                 items: cart,
-                referred_by_phone: referredByPhone.trim()
+                referred_by_phone: referredByPhone.trim(),
+                delivery_requested: DELIVERY_ENABLED ? deliveryRequested : false
               })
             });
             const d = await r.json();
@@ -1541,6 +1550,19 @@ export default function MainApp({
                   ))}
                 </View>
               </View>
+
+              {DELIVERY_ENABLED && (
+                <TouchableOpacity
+                  style={[s.pickupCard, { flexDirection: 'row', alignItems: 'center', gap: 10 }]}
+                  onPress={() => setDeliveryRequested(!deliveryRequested)}>
+                  <Ionicons
+                    name={deliveryRequested ? 'checkbox' : 'square-outline'}
+                    size={22}
+                    color={deliveryRequested ? '#4ADE80' : 'rgba(255,255,255,0.4)'}
+                  />
+                  <Text style={s.pickupTitle}>Deliver to me instead of pickup</Text>
+                </TouchableOpacity>
+              )}
 
               <View style={s.pickupCard}>
                 <Text style={s.pickupTitle}>Referred by a friend? (optional)</Text>
