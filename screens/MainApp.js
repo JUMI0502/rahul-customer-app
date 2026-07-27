@@ -973,7 +973,7 @@ export default function MainApp({
             <View style={s.greeting}>
               <View style={{ flex: 1 }}>
                 <Text style={s.greetName}>
-                  Hey, {customer?.name?.split(' ')[0]} 👋
+                  Hey, {customer?.name?.split(' ')[0]}
                 </Text>
                 <Text style={s.greetSub}>
                   What part are you looking for today?
@@ -1036,8 +1036,8 @@ export default function MainApp({
                     Loyalty Points
                   </Text>
                   <Text style={s.loyaltyHint}>
-                    {loyaltyPoints >= 10
-                      ? `₹${loyaltyPoints} discount ready!`
+                    {loyaltyPoints >= 100
+                      ? `You can redeem rewards now!`
                       : `Earn 1pt per ₹50 spent`}
                   </Text>
                 </View>
