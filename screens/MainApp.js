@@ -1322,7 +1322,7 @@ export default function MainApp({
                     <TouchableOpacity
                       onPress={() => shareProduct(item)}
                     >
-                      <Text style={{ fontSize: 16 }}>🔗</Text>
+                      <Ionicons name="share-social-outline" size={17} color="rgba(255,255,255,0.5)" />
                     </TouchableOpacity>
                     <Text style={s.productMrp}>₹{item.mrp}</Text>
                     <Text style={s.productPrice}>
@@ -1424,12 +1424,14 @@ export default function MainApp({
           ) : (
             <ScrollView contentContainerStyle={{ padding: 16 }}>
               <View style={s.cartCustomer}>
-                <Text style={s.cartCustomerName}>
-                  {isMechanic ? '🔧' : '👤'} {customer?.name}
-                </Text>
-                <Text style={s.cartCustomerPhone}>
-                  📱 +91 {customer?.phone}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <Ionicons name={isMechanic ? 'construct-outline' : 'person-outline'} size={15} color="#fff" />
+                  <Text style={s.cartCustomerName}>{customer?.name}</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 }}>
+                  <Ionicons name="call-outline" size={13} color="rgba(255,255,255,0.5)" />
+                  <Text style={s.cartCustomerPhone}>+91 {customer?.phone}</Text>
+                </View>
               </View>
 
               {cart.map((item, i) => (
@@ -1460,9 +1462,9 @@ export default function MainApp({
                           }
                         }}
                       >
-                        <Text style={s.qtyBtnText}>
-                          {item.qty === 1 ? '🗑️' : '−'}
-                        </Text>
+                        {item.qty === 1
+                          ? <Ionicons name="trash-outline" size={14} color="#EF4444" />
+                          : <Text style={s.qtyBtnText}>−</Text>}
                       </TouchableOpacity>
                       <Text style={s.qtyNum}>{item.qty}</Text>
                       <TouchableOpacity
@@ -1547,7 +1549,7 @@ export default function MainApp({
                 disabled={!pickupTime}
               >
                 <Text style={s.orderBtnText}>
-                  ✅ Place Order · ₹{finalTotal.toFixed(0)}
+                  Place Order · ₹{finalTotal.toFixed(0)}
                 </Text>
               </TouchableOpacity>
 
