@@ -490,7 +490,7 @@ export default function MainApp({
     await Share.share({
       message:
         `*${product.name_en}*\n` +
-        `OEM Part · ${product.sku}\n` +
+        `${product.is_oem ? 'Original OEM' : 'Generic / Compatible'} · ${product.sku}\n` +
         `₹${product.selling_price} (MRP ₹${product.mrp})\n` +
         `New Rahul Auto Spares\n` +
         `Telugu Peta, Nandyal\n08514-244944`,
