@@ -1963,16 +1963,17 @@ export default function MainApp({
                 <TouchableOpacity
                   onPress={() => shareProduct(selectedProduct)}
                 >
-                  <Text style={{ fontSize: 20 }}>🔗</Text>
+                  <Ionicons name="share-social-outline" size={20} color="rgba(255,255,255,0.7)" />
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
                     toggleFavorite(selectedProduct.id)}
                 >
-                  <Text style={{ fontSize: 22 }}>
-                    {favorites.includes(selectedProduct.id)
-                      ? '❤️' : '🤍'}
-                  </Text>
+                  <Ionicons
+                    name={favorites.includes(selectedProduct.id) ? 'heart' : 'heart-outline'}
+                    size={22}
+                    color={favorites.includes(selectedProduct.id) ? '#EF4444' : 'rgba(255,255,255,0.5)'}
+                  />
                 </TouchableOpacity>
               </View>
             </View>
@@ -1981,8 +1982,9 @@ export default function MainApp({
                 <Text style={s.heroIcon}>
                   {getIcon(selectedProduct.sku)}
                 </Text>
-                <View style={s.oemBadge}>
-                  <Text style={s.oemText}>✅ Original OEM</Text>
+                <View style={[s.oemBadge, { flexDirection: 'row', alignItems: 'center', gap: 5 }]}>
+                  <Ionicons name="checkmark-circle" size={13} color={s.oemText.color || '#4ADE80'} />
+                  <Text style={s.oemText}>Original OEM</Text>
                 </View>
               </View>
               <View style={{ padding: 20 }}>
@@ -1998,10 +2000,9 @@ export default function MainApp({
                   {selectedProduct.sku}
                 </Text>
                 {isMechanic && (
-                  <View style={s.mechBox}>
-                    <Text style={s.mechBoxText}>
-                      🔧 Mechanic 5% OFF Applied!
-                    </Text>
+                  <View style={[s.mechBox, { flexDirection: 'row', alignItems: 'center', gap: 6 }]}>
+                    <Ionicons name="construct" size={14} color={s.mechBoxText.color || '#FFC107'} />
+                    <Text style={s.mechBoxText}>Mechanic Trade Price Applied</Text>
                   </View>
                 )}
                 <View style={s.priceBox}>
