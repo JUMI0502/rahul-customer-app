@@ -1564,14 +1564,15 @@ export default function MainApp({
                     `&pn=New Rahul Auto Spares` +
                     `&am=${finalTotal.toFixed(2)}&cu=INR`
                   ).catch(() => Alert.alert(
-                    '📱 UPI',
+                    'UPI Payment',
                     `Pay ₹${finalTotal.toFixed(0)} to:\n${STORE_UPI}`
                   ));
                 }}
               >
-                <Text style={s.upiBtnText}>
-                  📱 Pay with UPI · ₹{finalTotal.toFixed(0)}
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                  <Ionicons name="phone-portrait-outline" size={16} color={s.upiBtnText.color || '#fff'} />
+                  <Text style={s.upiBtnText}>Pay with UPI · ₹{finalTotal.toFixed(0)}</Text>
+                </View>
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -1579,9 +1580,10 @@ export default function MainApp({
                 onPress={() =>
                   Linking.openURL('tel:08514244944')}
               >
-                <Text style={s.callStoreBtnText}>
-                  📞 Call Store
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                  <Ionicons name="call-outline" size={16} color={s.callStoreBtnText.color || '#fff'} />
+                  <Text style={s.callStoreBtnText}>Call Store</Text>
+                </View>
               </TouchableOpacity>
 
               <View style={{ height: 80 }} />
