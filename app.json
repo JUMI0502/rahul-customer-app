@@ -29,6 +29,12 @@
       "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json"
     },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/02693dd5-74df-488e-ba61-7a16ab7b8965"
+    },
     "extra": {
       "eas": {
         "projectId": "02693dd5-74df-488e-ba61-7a16ab7b8965"
