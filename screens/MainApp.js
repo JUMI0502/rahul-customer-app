@@ -2081,7 +2081,7 @@ export default function MainApp({
                     >
                       <Text style={[s.orderBtnText,
                         isMechanic && { color: '#06060E' }]}>
-                        🛒 Add to Cart ·
+                        Add to Cart ·
                         ₹{(
                           getPrice(selectedProduct) * qty
                         ).toFixed(0)}
@@ -2090,13 +2090,12 @@ export default function MainApp({
                   </>
                 )}
                 <TouchableOpacity
-                  style={s.callStoreBtn}
+                  style={[s.callStoreBtn, { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }]}
                   onPress={() =>
                     Linking.openURL('tel:08514244944')}
                 >
-                  <Text style={s.callStoreBtnText}>
-                    📞 Call Store
-                  </Text>
+                  <Ionicons name="call-outline" size={16} color={s.callStoreBtnText.color || '#fff'} />
+                  <Text style={s.callStoreBtnText}>Call Store</Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
@@ -2120,7 +2119,10 @@ export default function MainApp({
             >
               <Text style={s.modalBackText}>← Back</Text>
             </TouchableOpacity>
-            <Text style={s.modalTitle}>🔔 Notifications</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Ionicons name="notifications-outline" size={18} color="#fff" />
+              <Text style={s.modalTitle}>Notifications</Text>
+            </View>
             {notifications.length > 0 && (
               <TouchableOpacity
                 onPress={async () => {
@@ -2144,7 +2146,7 @@ export default function MainApp({
           </View>
           {notifications.length === 0 ? (
             <View style={s.emptyBox}>
-              <Text style={{ fontSize: 48 }}>🔕</Text>
+              <Ionicons name="notifications-off-outline" size={44} color="rgba(255,255,255,0.2)" />
               <Text style={s.emptyText}>No notifications</Text>
             </View>
           ) : (
@@ -2155,12 +2157,17 @@ export default function MainApp({
               renderItem={({ item }) => (
                 <View style={[s.notifCard,
                   !item.read && s.notifCardUnread]}>
-                  <Text style={s.notifIcon2}>
-                    {item.type === 'order' ? '📦'
-                      : item.type === 'spin' ? '🎡'
-                      : item.type === 'ready' ? '🎉'
-                      : '🔔'}
-                  </Text>
+                  <Ionicons
+                    name={
+                      item.type === 'order' ? 'cube-outline'
+                      : item.type === 'spin' ? 'gift-outline'
+                      : item.type === 'ready' ? 'checkmark-circle-outline'
+                      : 'notifications-outline'
+                    }
+                    size={22}
+                    color="#C9A84C"
+                    style={{ width: 28 }}
+                  />
                   <View style={{ flex: 1 }}>
                     <Text style={s.notifTitle2}>
                       {item.title}
