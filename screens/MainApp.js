@@ -1170,7 +1170,7 @@ export default function MainApp({
               <>
                 <View style={s.sectionHeader}>
                   <Text style={s.sectionTitle}>
-                    🕐 Recently Viewed
+                    Recently Viewed
                   </Text>
                 </View>
                 <ScrollView
@@ -1201,7 +1201,7 @@ export default function MainApp({
 
             {/* STORE HOURS */}
             <View style={s.hoursCard}>
-              <Text style={s.hoursTitle}>🕐 Store Hours</Text>
+              <Text style={s.hoursTitle}>Store Hours</Text>
               <View style={s.hoursRow}>
                 <Text style={s.hoursDay}>Mon – Sat</Text>
                 <Text style={s.hoursTime}>10:00 AM – 9:00 PM</Text>
@@ -1214,38 +1214,12 @@ export default function MainApp({
                 style={s.callBtn}
                 onPress={() => Linking.openURL('tel:08514244944')}
               >
-                <Text style={s.callBtnText}>
-                  📞 08514-244944
-                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                  <Ionicons name="call-outline" size={15} color="#fff" />
+                  <Text style={s.callBtnText}>08514-244944</Text>
+                </View>
               </TouchableOpacity>
             </View>
-
-            {/* RECENTLY ORDERED */}
-            {recentlyViewed.length > 0 && (
-              <View>
-                <View style={s.sectionHeader}>
-                  <Text style={s.sectionTitle}>Recently Viewed</Text>
-                  <TouchableOpacity onPress={() => setRecentlyViewed([])}>
-                    <Text style={s.seeAll}>Clear</Text>
-                  </TouchableOpacity>
-                </View>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={s.hScroll}>
-                  {recentlyViewed.slice(0, 6).map(item => (
-                    <TouchableOpacity key={item.id} style={s.miniCard}
-                      onPress={() => openProduct(item)} activeOpacity={0.8}>
-                      <View style={[s.miniCardIconBox, { backgroundColor: getPartLabel(item.sku).bg }]}>
-                        <Text style={[s.miniCardIconText, { color: getPartLabel(item.sku).color }]}>
-                          {getPartLabel(item.sku).label}
-                        </Text>
-                      </View>
-                      <Text style={s.miniCardName} numberOfLines={2}>{item.name_en}</Text>
-                      <Text style={s.miniCardPrice}>₹{item.selling_price}</Text>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-              </View>
-            )}
 
             <View style={{ height: 100 }} />
           </ScrollView>
@@ -1280,10 +1254,10 @@ export default function MainApp({
                   {vehicle && category === 'all' && vehicleSku && (
                     <View style={s.vehicleFilterBadge}>
                       <Text style={s.vehicleFilterText}>
-                        🏍️ {vehicle.brand} {vehicle.model}
+                        {vehicle.brand} {vehicle.model}
                       </Text>
                       <TouchableOpacity onPress={() => setCategory('all')}>
-                        <Text style={s.clearVehicle}> ✕</Text>
+                        <Ionicons name="close" size={14} color="rgba(255,255,255,0.5)" />
                       </TouchableOpacity>
                     </View>
                   )}
@@ -1291,7 +1265,7 @@ export default function MainApp({
               )}
               ListEmptyComponent={() => (
                 <View style={s.emptyBox}>
-                  <Text style={{ fontSize: 48 }}>🔍</Text>
+                  <Ionicons name="search-outline" size={44} color="rgba(255,255,255,0.2)" />
                   <Text style={s.emptyText}>No parts found</Text>
                   <TouchableOpacity
                     onPress={() => {
