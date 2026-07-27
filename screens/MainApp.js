@@ -2340,7 +2340,7 @@ function OrdersTab({ customer, onCancelOrder }) {
 
       {displayed.length === 0 ? (
         <View style={os.centerBox}>
-          <Text style={{ fontSize: 48, marginBottom: 12 }}>📋</Text>
+          <Ionicons name="receipt-outline" size={44} color="rgba(255,255,255,0.2)" style={{ marginBottom: 12 }} />
           <Text style={os.emptyText}>
             {filter === 'active' ? 'No active orders!' : 'No orders yet!'}
           </Text>
@@ -2368,9 +2368,10 @@ function OrdersTab({ customer, onCancelOrder }) {
                 <View style={os.orderHeader}>
                   <View>
                     <Text style={os.orderId}>{orderId(order)}</Text>
-                    <Text style={os.orderPickup}>
-                      📅 {order.pickup_time || '—'}
-                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                      <Ionicons name="calendar-outline" size={12} color="rgba(255,255,255,0.5)" />
+                      <Text style={os.orderPickup}>{order.pickup_time || '—'}</Text>
+                    </View>
                   </View>
                   <View style={os.orderRight}>
                     <Text style={os.orderAmount}>
@@ -2381,7 +2382,10 @@ function OrdersTab({ customer, onCancelOrder }) {
                         style={os.callBtn}
                         onPress={() => Linking.openURL('tel:08514244944')}
                       >
-                        <Text style={os.callBtnText}>📞 Call</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                          <Ionicons name="call-outline" size={12} color={os.callBtnText.color || '#fff'} />
+                          <Text style={os.callBtnText}>Call</Text>
+                        </View>
                       </TouchableOpacity>
                     )}
                   </View>
@@ -2389,9 +2393,10 @@ function OrdersTab({ customer, onCancelOrder }) {
 
                 {order.status === 'ready' && (
                   <View style={os.readyBanner}>
-                    <Text style={os.readyText}>
-                      🎉 Ready! Come pick up now!
-                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                      <Ionicons name="checkmark-circle" size={16} color={os.readyText.color || '#4ADE80'} />
+                      <Text style={os.readyText}>Ready! Come pick up now!</Text>
+                    </View>
                   </View>
                 )}
 
