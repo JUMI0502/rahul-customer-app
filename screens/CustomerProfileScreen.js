@@ -108,10 +108,10 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
   };
 
   const handleSave = async () => {
-    if (!name.trim()) { Alert.alert('❌', 'Name is required'); return; }
-    if (!phone.trim()) { Alert.alert('❌', 'Phone is required'); return; }
-    if (email && !email.includes('@')) { Alert.alert('❌', 'Invalid email address'); return; }
-    if (upiId && !upiId.includes('@')) { Alert.alert('❌', 'Invalid UPI ID (e.g. name@upi)'); return; }
+    if (!name.trim()) { Alert.alert('', 'Name is required'); return; }
+    if (!phone.trim()) { Alert.alert('', 'Phone is required'); return; }
+    if (email && !email.includes('@')) { Alert.alert('', 'Invalid email address'); return; }
+    if (upiId && !upiId.includes('@')) { Alert.alert('', 'Invalid UPI ID (e.g. name@upi)'); return; }
 
     setSaving(true);
     try {
@@ -157,9 +157,9 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setEditing(false);
-      Alert.alert('✅ Saved!', 'Your profile has been updated.');
+      Alert.alert('Saved!', 'Your profile has been updated.');
     } catch {
-      Alert.alert('❌ Error', 'Could not save profile. Try again.');
+      Alert.alert('Error', 'Could not save profile. Try again.');
     }
     setSaving(false);
   };
@@ -174,14 +174,14 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
         <TouchableOpacity style={s.backBtn} onPress={onBack}>
           <Text style={s.backBtnText}>← Back</Text>
         </TouchableOpacity>
-        <Text style={s.headerTitle}>👤 My Profile</Text>
+        <Text style={s.headerTitle}>My Profile</Text>
         <TouchableOpacity
           style={[s.editBtn, editing && s.editBtnActive]}
           onPress={() => editing ? handleSave() : setEditing(true)}
           disabled={saving}>
           {saving
             ? <ActivityIndicator size="small" color="#fff" />
-            : <Text style={s.editBtnText}>{editing ? '💾 Save' : '✏️ Edit'}</Text>}
+            : <Text style={s.editBtnText}>{editing ? 'Save' : '️ Edit'}</Text>}
         </TouchableOpacity>
       </View>
 
@@ -204,7 +204,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             </View>
           </TouchableOpacity>
           <Text style={s.summaryName}>{name || customer?.name}</Text>
-          <Text style={s.summaryPhone}>📱 +91 {phone || customer?.phone}</Text>
+          <Text style={s.summaryPhone}>+91 {phone || customer?.phone}</Text>
           {vehicle && (
             <View style={s.summaryVehicle}>
               <Text style={s.summaryVehicleText}>
@@ -227,14 +227,14 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             <View style={s.statDivider} />
             <View style={s.statItem}>
               <Text style={s.statValue}>{loyaltyPoints || 0}</Text>
-              <Text style={s.statLabel}>💎 Points</Text>
+              <Text style={s.statLabel}>Points</Text>
             </View>
           </View>
         </LinearGradient>
 
         {/* ── PERSONAL DETAILS ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>👤 Personal Details</Text>
+          <Text style={s.cardTitle}>Personal Details</Text>
 
           <Text style={s.label}>Full Name *</Text>
           <TextInput style={[s.input, !editing && s.inputDisabled]}
@@ -280,7 +280,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
         {/* ── ADDRESS ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>📍 Address</Text>
+          <Text style={s.cardTitle}>Address</Text>
 
           <Text style={s.label}>Street / Area</Text>
           <TextInput style={[s.input, s.inputMulti, !editing && s.inputDisabled]}
@@ -309,7 +309,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
         {/* ── PAYMENT DETAILS ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>💳 Payment Details</Text>
+          <Text style={s.cardTitle}>Payment Details</Text>
 
           <Text style={s.paymentNote}>
             💡 Add your UPI ID so staff can send payment requests directly
@@ -326,7 +326,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           {/* PAYMENT METHODS INFO */}
           <Text style={s.label}>Accepted Payment Methods</Text>
           <View style={s.paymentMethods}>
-            {['💵 Cash', '📱 UPI', '💳 Paytm', '🏦 NEFT'].map((method, i) => (
+            {['Cash', 'UPI', 'Paytm', 'NEFT'].map((method, i) => (
               <View key={i} style={s.paymentMethod}>
                 <Text style={s.paymentMethodText}>{method}</Text>
               </View>
@@ -338,7 +338,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
         {/* ── PREFERENCES ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>🔔 Preferences</Text>
+          <Text style={s.cardTitle}>Preferences</Text>
 
           <View style={s.prefRow}>
             <View style={{ flex: 1 }}>
@@ -385,7 +385,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
         {/* ── NOTES ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>📝 Notes</Text>
+          <Text style={s.cardTitle}>Notes</Text>
           <Text style={s.label}>Personal Notes (for your reference)</Text>
           <TextInput style={[s.input, s.inputMulti, !editing && s.inputDisabled]}
             value={notes} onChangeText={setNotes}
@@ -397,23 +397,23 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
         {/* ── ACCOUNT ACTIONS ── */}
         <View style={s.card}>
-          <Text style={s.cardTitle}>⚙️ Account</Text>
+          <Text style={s.cardTitle}>️ Account</Text>
 
           <TouchableOpacity style={s.actionRow}
             onPress={async () => {
               Alert.alert(
-                '🗑️ Clear Cache',
+                '️ Clear Cache',
                 'This will clear locally saved products cache. Your profile will be kept.',
                 [
                   { text: 'Cancel', style: 'cancel' },
                   { text: 'Clear', style: 'destructive', onPress: async () => {
                     await AsyncStorage.removeItem('products_cache_v4');
-                    Alert.alert('✅ Done', 'Cache cleared! Products will reload fresh.');
+                    Alert.alert('Done', 'Cache cleared! Products will reload fresh.');
                   }},
                 ]
               );
             }}>
-            <Text style={s.actionIcon}>🗑️</Text>
+            <Text style={s.actionIcon}>️</Text>
             <View style={{ flex: 1 }}>
               <Text style={s.actionLabel}>Clear Products Cache</Text>
               <Text style={s.actionSub}>Force reload fresh products from server</Text>
@@ -424,7 +424,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           <TouchableOpacity style={s.actionRow}
             onPress={async () => {
               Alert.alert(
-                '🗑️ Clear Profile',
+                '️ Clear Profile',
                 'This will delete all your saved profile details.',
                 [
                   { text: 'Cancel', style: 'cancel' },
@@ -432,12 +432,12 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
                     await AsyncStorage.removeItem(PROFILE_KEY);
                     setEmail(''); setAddress(''); setCity('Nandyal');
                     setPincode(''); setUpiId(''); setBirthday(''); setNotes('');
-                    Alert.alert('✅ Done', 'Profile data cleared.');
+                    Alert.alert('Done', 'Profile data cleared.');
                   }},
                 ]
               );
             }}>
-            <Text style={s.actionIcon}>🔄</Text>
+            <Text style={s.actionIcon}></Text>
             <View style={{ flex: 1 }}>
               <Text style={s.actionLabel}>Reset Profile Data</Text>
               <Text style={s.actionSub}>Clear all saved personal details</Text>

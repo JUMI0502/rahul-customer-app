@@ -13,7 +13,7 @@ const QUESTIONS = [
     id: 1,
     question: 'How long since your last oil change?',
     questionTe: 'చివరిసారి ఆయిల్ మార్చి ఎంత కాలమైంది?',
-    icon: '🛢️',
+    icon: '️',
     options: [
       { label: 'Less than 3 months', score: 10 },
       { label: '3-6 months', score: 7 },
@@ -25,7 +25,7 @@ const QUESTIONS = [
     id: 2,
     question: 'How are your brakes working?',
     questionTe: 'మీ బ్రేక్స్ ఎలా పని చేస్తున్నాయి?',
-    icon: '🔧',
+    icon: '',
     options: [
       { label: 'Excellent - stops perfectly', score: 10 },
       { label: 'Good - minor noise', score: 7 },
@@ -37,7 +37,7 @@ const QUESTIONS = [
     id: 3,
     question: 'How is your bike\'s engine performance?',
     questionTe: 'ఇంజన్ పనితీరు ఎలా ఉంది?',
-    icon: '⚙️',
+    icon: '️',
     options: [
       { label: 'Smooth - no issues', score: 10 },
       { label: 'Slight noise sometimes', score: 6 },
@@ -49,7 +49,7 @@ const QUESTIONS = [
     id: 4,
     question: 'What is the tyre condition?',
     questionTe: 'టైర్ పరిస్థితి ఏమిటి?',
-    icon: '🏍️',
+    icon: '️',
     options: [
       { label: 'Like new - good grip', score: 10 },
       { label: 'Moderate wear - ok', score: 7 },
@@ -61,7 +61,7 @@ const QUESTIONS = [
     id: 5,
     question: 'How is the chain condition?',
     questionTe: 'చైన్ పరిస్థితి ఏమిటి?',
-    icon: '🔗',
+    icon: '',
     options: [
       { label: 'Well oiled - no noise', score: 10 },
       { label: 'Little loose - ok', score: 6 },
@@ -215,7 +215,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
           <TouchableOpacity style={s.backBtn} onPress={onBack}>
             <Text style={s.backBtnText}>← Back</Text>
           </TouchableOpacity>
-          <Text style={s.headerTitle}>🏍️ Bike Health</Text>
+          <Text style={s.headerTitle}>️ Bike Health</Text>
           <View style={{ width: 70 }} />
         </View>
         <ScrollView contentContainerStyle={s.introBody}>
@@ -225,7 +225,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
               opacity: cardOpacity
             }
           ]}>
-            <Text style={s.introIcon}>🏍️</Text>
+            <Text style={s.introIcon}>️</Text>
             <Text style={s.introTitle}>
               Free Bike Health Check!
             </Text>
@@ -238,10 +238,10 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
             </Text>
             <View style={s.introFeatures}>
               {[
-                '✅ 5 simple questions',
-                '📊 Health score out of 100',
-                '🔧 Parts recommendations',
-                '⚡ Takes only 1 minute!',
+                '5 simple questions',
+                'Health score out of 100',
+                'Parts recommendations',
+                'Takes only 1 minute!',
               ].map((f, i) => (
                 <Text key={i} style={s.introFeature}>{f}</Text>
               ))}
@@ -343,7 +343,7 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
 
           {/* TIPS */}
           <View style={s.tipsCard}>
-            <Text style={s.tipsTitle}>💡 Maintenance Tips</Text>
+            <Text style={s.tipsTitle}>Maintenance Tips</Text>
             {[
               'Change engine oil every 2000-3000 km',
               'Check tyre pressure every month',
