@@ -459,6 +459,28 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           <Text style={s.logoutText}>← Logout</Text>
         </TouchableOpacity>
 
+        {/* DELETE ACCOUNT */}
+        <TouchableOpacity style={[s.logoutBtn, { marginTop: 10, borderColor: 'rgba(239,68,68,0.3)' }]}
+          onPress={() => Alert.alert(
+            'Delete Your Account?',
+            'This permanently deletes your name, phone number, PIN, and loyalty points. Your past orders will be kept for our business records but will no longer be linked to you. This cannot be undone.',
+            [
+              { text: 'Cancel', style: 'cancel' },
+              { text: 'Delete Forever', style: 'destructive', onPress: async () => {
+                try {
+                  const r = await fetch(`${API_URL}/customers/${customer?.phone}/account`, { method: 'DELETE' });
+                  if (!r.ok) throw new Error('failed');
+                  await AsyncStorage.clear();
+                  onLogout();
+                } catch {
+                  Alert.alert('Error', 'Could not delete account. Please try again or contact us directly.');
+                }
+              } },
+            ]
+          )}>
+          <Text style={[s.logoutText, { color: '#EF4444' }]}>Delete My Account</Text>
+        </TouchableOpacity>
+
         {/* EDIT HINT */}
         {!editing && (
           <Text style={s.editHint}>
