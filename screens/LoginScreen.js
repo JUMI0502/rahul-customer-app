@@ -25,6 +25,10 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
   const [shopName, setShopName] = useState('');
   const [area, setArea]         = useState('');
   const [loading, setLoading]   = useState(false);
+  const [customerStep, setCustomerStep] = useState('details'); // 'details' | 'create-pin' | 'enter-pin'
+  const [pin, setPin] = useState('');
+  const [pinConfirm, setPinConfirm] = useState('');
+  const [pinError, setPinError] = useState('');
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(30)).current;
 
@@ -43,13 +47,70 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
     setTimeout(animateIn, 10);
   };
 
-  const handleCustomerLogin = async () => {
+  const handleCustomerContinue = async () => {
     if (!name.trim())       { Alert.alert('', 'Please enter your name'); return; }
     if (phone.length < 10)  { Alert.alert('', 'Enter valid 10-digit phone number'); return; }
-    await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    const user = { name: name.trim(), phone: phone.trim(), type: 'customer' };
-    await AsyncStorage.setItem('customer_profile', JSON.stringify(user));
-    onCustomerLogin(user);
+    setLoading(true);
+    try {
+      const r = await fetch(`${API_URL}/customers/${phone.trim()}/has-pin`);
+      const d = await r.json();
+      setLoading(false);
+      if (d.has_pin) {
+        setCustomerStep('enter-pin');
+      } else {
+        setCustomerStep('create-pin');
+      }
+    } catch {
+      setLoading(false);
+      Alert.alert('Error', 'Could not connect. Check your internet.');
+    }
+  };
+
+  const handleCreatePin = async () => {
+    if (pin.length !== 4) { setPinError('PIN must be 4 digits'); return; }
+    if (pin !== pinConfirm) { setPinError('PINs do not match'); return; }
+    setPinError('');
+    setLoading(true);
+    try {
+      const r = await fetch(`${API_URL}/customers/set-pin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone.trim(), name: name.trim(), pin })
+      });
+      const d = await r.json();
+      setLoading(false);
+      if (d.error) { setPinError(d.error); return; }
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      const user = { name: name.trim(), phone: phone.trim(), type: 'customer' };
+      await AsyncStorage.setItem('customer_profile', JSON.stringify(user));
+      onCustomerLogin(user);
+    } catch {
+      setLoading(false);
+      setPinError('Could not connect. Check your internet.');
+    }
+  };
+
+  const handleVerifyPin = async () => {
+    if (pin.length !== 4) { setPinError('Enter your 4-digit PIN'); return; }
+    setPinError('');
+    setLoading(true);
+    try {
+      const r = await fetch(`${API_URL}/customers/verify-pin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone.trim(), pin })
+      });
+      const d = await r.json();
+      setLoading(false);
+      if (!d.verified) { setPinError('Incorrect PIN. Please try again.'); setPin(''); return; }
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      const user = { name: d.name || name.trim(), phone: phone.trim(), type: 'customer' };
+      await AsyncStorage.setItem('customer_profile', JSON.stringify(user));
+      onCustomerLogin(user);
+    } catch {
+      setLoading(false);
+      setPinError('Could not connect. Check your internet.');
+    }
   };
 
   const handleMechanicCheck = async () => {
@@ -205,7 +266,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
   // ══════════════════════════════════════
   // CUSTOMER LOGIN
   // ══════════════════════════════════════
-  if (mode === 'customer') {
+  if (mode === 'customer' && customerStep === 'details') {
     return (
       <SafeAreaView style={s.container}>
         <StatusBar barStyle="light-content" backgroundColor="#07111F" />
@@ -275,10 +336,87 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             </View>
 
             <TouchableOpacity
-              style={[s.submitBtn, { backgroundColor: '#4F6EF7' }, (!name || phone.length < 10) && { opacity: 0.4 }]}
-              onPress={handleCustomerLogin}
-              disabled={!name || phone.length < 10}>
-              <Text style={s.submitBtnText}>Continue</Text>
+              style={[s.submitBtn, { backgroundColor: '#4F6EF7' }, (!name || phone.length < 10 || loading) && { opacity: 0.4 }]}
+              onPress={handleCustomerContinue}
+              disabled={!name || phone.length < 10 || loading}>
+              {loading
+                ? <ActivityIndicator color="#fff" />
+                : <Text style={s.submitBtnText}>Continue</Text>}
+            </TouchableOpacity>
+
+            <View style={{ height: 40 }} />
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    );
+  }
+
+  if (mode === 'customer' && (customerStep === 'create-pin' || customerStep === 'enter-pin')) {
+    const isNew = customerStep === 'create-pin';
+    return (
+      <SafeAreaView style={s.container}>
+        <StatusBar barStyle="light-content" backgroundColor="#07111F" />
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+          <ScrollView contentContainerStyle={s.formScroll} keyboardShouldPersistTaps="handled">
+
+            <TouchableOpacity style={s.backBtn} onPress={() => { setCustomerStep('details'); setPin(''); setPinConfirm(''); setPinError(''); }}>
+              <Ionicons name="arrow-back" size={14} color="rgba(255,255,255,0.6)" />
+              <Text style={s.backBtnText}>Back</Text>
+            </TouchableOpacity>
+
+            <View style={s.formHeader}>
+              <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(79,110,247,0.1)', borderColor: 'rgba(79,110,247,0.3)' }]}>
+                <Ionicons name="keypad-outline" size={32} color="#4F6EF7" />
+              </View>
+              <Text style={s.formTitle}>{isNew ? 'Create Your PIN' : 'Enter Your PIN'}</Text>
+              <Text style={s.formSub}>
+                {isNew ? 'Set a 4-digit PIN to protect your account' : `Welcome back! Enter your PIN to continue`}
+              </Text>
+            </View>
+
+            <View style={s.inputCard}>
+              <Text style={s.inputLabel}>{isNew ? 'CREATE 4-DIGIT PIN' : '4-DIGIT PIN'}</Text>
+              <View style={s.inputRow}>
+                <Ionicons name="lock-closed-outline" size={18} color="rgba(255,255,255,0.35)" />
+                <TextInput
+                  style={s.inputField}
+                  placeholder="••••"
+                  placeholderTextColor="rgba(255,255,255,0.2)"
+                  value={pin} onChangeText={(v) => { setPin(v); setPinError(''); }}
+                  keyboardType="number-pad" maxLength={4} secureTextEntry />
+              </View>
+
+              {isNew && (
+                <>
+                  <Text style={[s.inputLabel, { marginTop: 16 }]}>CONFIRM PIN</Text>
+                  <View style={s.inputRow}>
+                    <Ionicons name="lock-closed-outline" size={18} color="rgba(255,255,255,0.35)" />
+                    <TextInput
+                      style={s.inputField}
+                      placeholder="••••"
+                      placeholderTextColor="rgba(255,255,255,0.2)"
+                      value={pinConfirm} onChangeText={(v) => { setPinConfirm(v); setPinError(''); }}
+                      keyboardType="number-pad" maxLength={4} secureTextEntry />
+                  </View>
+                </>
+              )}
+
+              {pinError ? (
+                <View style={[s.validRow, { marginTop: 10 }]}>
+                  <Ionicons name="alert-circle" size={14} color="#EF4444" />
+                  <Text style={[s.validText, { color: '#EF4444' }]}>{pinError}</Text>
+                </View>
+              ) : null}
+            </View>
+
+            <TouchableOpacity
+              style={[s.submitBtn, { backgroundColor: '#4F6EF7' },
+                (isNew ? (pin.length !== 4 || pinConfirm.length !== 4) : pin.length !== 4) && { opacity: 0.4 }]}
+              onPress={isNew ? handleCreatePin : handleVerifyPin}
+              disabled={loading || (isNew ? (pin.length !== 4 || pinConfirm.length !== 4) : pin.length !== 4)}>
+              {loading
+                ? <ActivityIndicator color="#fff" />
+                : <Text style={s.submitBtnText}>{isNew ? 'Create PIN & Continue' : 'Verify & Continue'}</Text>}
             </TouchableOpacity>
 
             <View style={{ height: 40 }} />
