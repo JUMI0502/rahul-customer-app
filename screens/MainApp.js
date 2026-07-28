@@ -231,6 +231,23 @@ export default function MainApp({
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useState([]);
+
+  // Sync cart to backend (debounced) so staff can identify abandoned carts
+  useEffect(() => {
+    if (!customer?.phone) return;
+    const timer = setTimeout(() => {
+      fetch(`${API_URL}/cart/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer_phone: customer.phone,
+          customer_name: customer.name,
+          items: cart.map(i => ({ name: i.name_en, sku: i.sku, qty: i.qty }))
+        })
+      }).catch(() => {});
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [cart, customer?.phone]);
   const [favorites, setFavorites] = useState([]);
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [loyaltyPoints, setLoyaltyPoints] = useState(0);
@@ -629,6 +646,7 @@ export default function MainApp({
             setPickupTime('');
             setReferredByPhone('');
             setTab('orders');
+            fetch(`${API_URL}/cart/${customer?.phone}`, { method: 'DELETE' }).catch(() => {});
           } catch (err) {
             placingOrderRef.current = false;
             Alert.alert(
