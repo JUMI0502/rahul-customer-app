@@ -731,11 +731,13 @@ export default function MainApp({
       if (vehicleSku) return p.sku?.startsWith(vehicleSku);
       return true;
     })
-    .filter(p =>
-      !search ||
-      p.name_en?.toLowerCase().includes(search.toLowerCase()) ||
-      p.sku?.toLowerCase().includes(search.toLowerCase())
-    );
+    .filter(p => {
+      if (!search.trim()) return true;
+      const haystack = [p.name_en, p.name_te, p.name_hi, p.sku]
+        .filter(Boolean).join(' ').toLowerCase();
+      const words = search.toLowerCase().trim().split(/\s+/);
+      return words.every(w => haystack.includes(w));
+    });
 
   const favProducts = products.filter(
     p => favorites.includes(p.id)
