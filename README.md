@@ -1,4 +1,19 @@
-# New Rahul Auto Spares — Customer App
+## Before You Start
+Request the following from the project owner before setup:
+- `x-api-key` value for backend requests
+- Confirm you have: Node.js, Android Studio + Android SDK, a physical
+  Android device (or emulator) with Google Play Services
+
+## Requirements
+- Node.js v25.9.0 (or compatible)
+- JDK 21
+- Android Studio with SDK installed
+- Do NOT install a global `expo-cli` — this project uses the local Expo CLI
+  automatically via `npx expo`, per the commands in this README
+
+## Questions or Blockers
+Contact Amini Masthan Reddy (aminimasthanreddy@gmail.com) if setup fails or
+this README is outdated.≈# New Rahul Auto Spares — Customer App
 
 React Native (Expo SDK 54) app for customers to browse parts, place orders,
 and track loyalty rewards.
