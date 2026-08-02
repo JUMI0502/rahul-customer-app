@@ -2459,7 +2459,7 @@ function OrdersTab({ customer, onCancelOrder }) {
             const qrUrl =
               `https://api.qrserver.com/v1/create-qr-code/` +
               `?size=140x140&data=${orderId(order)}` +
-              `&bgcolor=0E0E1C&color=4F6EF7&qzone=2`;
+              `&bgcolor=0E0E1C&color=C9A84C&qzone=2`;
 
             return (
               <View key={order.id} style={os.orderCard}>
