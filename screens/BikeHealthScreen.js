@@ -82,8 +82,8 @@ const getHealthData = (score) => {
   };
   if (score >= 60) return {
     label: 'Good',
-    color: '#4F6EF7',
-    bg: 'rgba(79,110,247,0.1)',
+    color: '#C9A84C',
+    bg: 'rgba(201,168,76,0.1)',
     desc: 'Minor maintenance needed soon.',
     descTe: 'చిన్న మెయింటెనెన్స్ అవసరం.',
     parts: ['Engine Oil', 'Chain Lubricant']
@@ -406,13 +406,13 @@ export default function BikeHealthScreen({ onBack, onBrowseParts }) {
               <TouchableOpacity
                 style={[s.optionBtn,
                   { borderColor: i % 2 === 0
-                    ? 'rgba(79,110,247,0.3)'
+                    ? 'rgba(201,168,76,0.3)'
                     : 'rgba(255,193,7,0.3)' }]}
                 onPress={() => selectAnswer(opt, i)}
               >
                 <View style={[s.optionDot,
                   { backgroundColor: i % 2 === 0
-                    ? '#4F6EF7' : '#FFC107' }]} />
+                    ? '#C9A84C' : '#FFC107' }]} />
                 <Text style={s.optionText}>{opt.label}</Text>
                 <Text style={s.optionArrow}>→</Text>
               </TouchableOpacity>
@@ -430,14 +430,14 @@ const s = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center',
     justifyContent: 'space-between', padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(79,110,247,0.15)',
+    borderBottomColor: 'rgba(201,168,76,0.15)',
   },
   backBtn: {
-    backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 10,
+    backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 10,
     paddingHorizontal: 14, paddingVertical: 8, borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)',
+    borderColor: 'rgba(201,168,76,0.2)',
   },
-  backBtnText: { color: '#4F6EF7', fontSize: 14, fontWeight: 'bold' },
+  backBtnText: { color: '#C9A84C', fontSize: 14, fontWeight: 'bold' },
   headerTitle: {
     fontSize: 16, fontWeight: 'bold', color: '#fff',
   },
@@ -448,7 +448,7 @@ const s = StyleSheet.create({
   introCard: {
     backgroundColor: '#0E0E1C', borderRadius: 24, padding: 28,
     alignItems: 'center', borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)', width: '100%',
+    borderColor: 'rgba(201,168,76,0.2)', width: '100%',
   },
   introIcon: { fontSize: 72, marginBottom: 16 },
   introTitle: {
@@ -456,7 +456,7 @@ const s = StyleSheet.create({
     marginBottom: 4, textAlign: 'center',
   },
   introTitleTe: {
-    fontSize: 14, color: 'rgba(79,110,247,0.6)',
+    fontSize: 14, color: 'rgba(201,168,76,0.6)',
     marginBottom: 14, textAlign: 'center',
   },
   introDesc: {
@@ -468,22 +468,22 @@ const s = StyleSheet.create({
   },
   introFeature: { fontSize: 13, color: 'rgba(255,255,255,0.7)' },
   startBtn: {
-    backgroundColor: '#4F6EF7', borderRadius: 20,
+    backgroundColor: '#C9A84C', borderRadius: 20,
     paddingHorizontal: 32, paddingVertical: 16, width: '100%',
     alignItems: 'center',
   },
   startBtnText: { color: '#fff', fontSize: 17, fontWeight: 'bold' },
   progressBg: {
-    height: 4, backgroundColor: 'rgba(79,110,247,0.15)',
+    height: 4, backgroundColor: 'rgba(201,168,76,0.15)',
   },
   progressFill: {
-    height: '100%', backgroundColor: '#4F6EF7', borderRadius: 2,
+    height: '100%', backgroundColor: '#C9A84C', borderRadius: 2,
   },
   questionBody: { flex: 1, padding: 20 },
   questionCard: {
     backgroundColor: '#0E0E1C', borderRadius: 20, padding: 24,
     alignItems: 'center', marginBottom: 20, borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)',
+    borderColor: 'rgba(201,168,76,0.2)',
   },
   qIcon: { fontSize: 48, marginBottom: 14 },
   qText: {
@@ -491,7 +491,7 @@ const s = StyleSheet.create({
     textAlign: 'center', marginBottom: 6, lineHeight: 26,
   },
   qTextTe: {
-    fontSize: 13, color: 'rgba(79,110,247,0.6)',
+    fontSize: 13, color: 'rgba(201,168,76,0.6)',
     textAlign: 'center',
   },
   optionsWrap: { gap: 10 },
@@ -541,7 +541,7 @@ const s = StyleSheet.create({
   partsCard: {
     backgroundColor: '#0E0E1C', borderRadius: 20, padding: 20,
     marginBottom: 16, borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)',
+    borderColor: 'rgba(201,168,76,0.2)',
   },
   partsTitle: {
     fontSize: 16, fontWeight: 'bold', color: '#fff', marginBottom: 4,
@@ -552,7 +552,7 @@ const s = StyleSheet.create({
   partRow: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
     paddingVertical: 10, borderBottomWidth: 1,
-    borderBottomColor: 'rgba(79,110,247,0.08)',
+    borderBottomColor: 'rgba(201,168,76,0.08)',
   },
   partDot: { width: 8, height: 8, borderRadius: 4 },
   partName: { flex: 1, fontSize: 14, color: '#fff', fontWeight: '600' },
@@ -575,9 +575,9 @@ const s = StyleSheet.create({
     marginBottom: 8, lineHeight: 20,
   },
   retakeBtn: {
-    backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 16,
+    backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 16,
     padding: 14, alignItems: 'center', borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)',
+    borderColor: 'rgba(201,168,76,0.2)',
   },
-  retakeBtnText: { color: '#4F6EF7', fontWeight: 'bold', fontSize: 15 },
+  retakeBtnText: { color: '#C9A84C', fontWeight: 'bold', fontSize: 15 },
 });

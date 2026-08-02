@@ -362,7 +362,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             <Switch
               value={prefNotifs}
               onValueChange={v => { if (editing) setPrefNotifs(v); }}
-              trackColor={{ false: 'rgba(255,255,255,0.1)', true: '#4F6EF7' }}
+              trackColor={{ false: 'rgba(255,255,255,0.1)', true: '#C9A84C' }}
               thumbColor={prefNotifs ? '#fff' : 'rgba(255,255,255,0.4)'}
               disabled={!editing}
             />
@@ -500,29 +500,29 @@ const s = StyleSheet.create({
   // Header
   header: {
     flexDirection: 'row', alignItems: 'center', padding: 14, gap: 12,
-    borderBottomWidth: 1, borderBottomColor: 'rgba(79,110,247,0.15)',
+    borderBottomWidth: 1, borderBottomColor: 'rgba(201,168,76,0.15)',
     backgroundColor: '#0E0E1C',
   },
   backBtn: {
-    backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 10,
+    backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 10,
     paddingHorizontal: 12, paddingVertical: 8,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)',
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)',
   },
-  backBtnText: { color: '#4F6EF7', fontSize: 14, fontWeight: 'bold' },
+  backBtnText: { color: '#C9A84C', fontSize: 14, fontWeight: 'bold' },
   headerTitle: { flex: 1, fontSize: 17, fontWeight: 'bold', color: '#fff' },
   editBtn: {
-    backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 10,
+    backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 10,
     paddingHorizontal: 14, paddingVertical: 8,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)',
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)',
   },
-  editBtnActive: { backgroundColor: '#4F6EF7', borderColor: '#4F6EF7' },
-  editBtnText: { color: '#4F6EF7', fontSize: 13, fontWeight: 'bold' },
+  editBtnActive: { backgroundColor: '#C9A84C', borderColor: '#C9A84C' },
+  editBtnText: { color: '#C9A84C', fontSize: 13, fontWeight: 'bold' },
 
   // Summary card
   summaryCard: {
     borderRadius: 20, padding: 20, marginBottom: 14,
     alignItems: 'center', borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.2)',
+    borderColor: 'rgba(201,168,76,0.2)',
   },
   avatarImage: { width: 72, height: 72, borderRadius: 36 },
   avatarEditBadge: {
@@ -533,32 +533,32 @@ const s = StyleSheet.create({
   avatarEditText: { fontSize: 9, fontWeight: 'bold', color: '#07111F' },
   avatarBox: {
     width: 72, height: 72, borderRadius: 36,
-    backgroundColor: '#4F6EF7', alignItems: 'center',
+    backgroundColor: '#C9A84C', alignItems: 'center',
     justifyContent: 'center', marginBottom: 10,
   },
   avatar: { fontSize: 32, color: '#fff', fontWeight: 'bold' },
   summaryName: { fontSize: 20, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
   summaryPhone: { fontSize: 13, color: 'rgba(255,255,255,0.5)', marginBottom: 8 },
   summaryVehicle: {
-    backgroundColor: 'rgba(79,110,247,0.15)', borderRadius: 20,
+    backgroundColor: 'rgba(201,168,76,0.15)', borderRadius: 20,
     paddingHorizontal: 12, paddingVertical: 4, marginBottom: 16,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.3)',
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.3)',
   },
-  summaryVehicleText: { color: '#4F6EF7', fontSize: 12, fontWeight: 'bold' },
+  summaryVehicleText: { color: '#C9A84C', fontSize: 12, fontWeight: 'bold' },
   statsRow: {
     flexDirection: 'row', width: '100%',
-    borderTopWidth: 1, borderTopColor: 'rgba(79,110,247,0.15)',
+    borderTopWidth: 1, borderTopColor: 'rgba(201,168,76,0.15)',
     paddingTop: 14, gap: 0,
   },
   statItem: { flex: 1, alignItems: 'center', gap: 4 },
   statValue: { fontSize: 18, fontWeight: 'bold', color: '#FFC107' },
   statLabel: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
-  statDivider: { width: 1, backgroundColor: 'rgba(79,110,247,0.15)' },
+  statDivider: { width: 1, backgroundColor: 'rgba(201,168,76,0.15)' },
 
   // Cards
   card: {
     backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16,
-    marginBottom: 14, borderWidth: 1, borderColor: 'rgba(79,110,247,0.12)',
+    marginBottom: 14, borderWidth: 1, borderColor: 'rgba(201,168,76,0.12)',
   },
   cardTitle: { fontSize: 15, fontWeight: 'bold', color: '#fff', marginBottom: 12 },
 
@@ -567,11 +567,11 @@ const s = StyleSheet.create({
   input: {
     backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: 10,
     padding: 12, color: '#fff', fontSize: 14,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)',
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)',
   },
   inputDisabled: {
     backgroundColor: 'rgba(255,255,255,0.02)',
-    borderColor: 'rgba(79,110,247,0.08)',
+    borderColor: 'rgba(201,168,76,0.08)',
     color: 'rgba(255,255,255,0.6)',
   },
   inputMulti: { height: 70, textAlignVertical: 'top' },
@@ -585,9 +585,9 @@ const s = StyleSheet.create({
   },
   paymentMethods: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 4 },
   paymentMethod: {
-    backgroundColor: 'rgba(79,110,247,0.08)', borderRadius: 8,
+    backgroundColor: 'rgba(201,168,76,0.08)', borderRadius: 8,
     paddingHorizontal: 10, paddingVertical: 6,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)',
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)',
   },
   paymentMethodText: { color: 'rgba(255,255,255,0.6)', fontSize: 12 },
   storeUpiBox: {
@@ -603,7 +603,7 @@ const s = StyleSheet.create({
   prefRow: {
     flexDirection: 'row', alignItems: 'center',
     paddingVertical: 12, borderBottomWidth: 1,
-    borderBottomColor: 'rgba(79,110,247,0.08)',
+    borderBottomColor: 'rgba(201,168,76,0.08)',
   },
   prefLabel: { fontSize: 14, color: '#fff', fontWeight: '600', marginBottom: 2 },
   prefSub: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
@@ -612,12 +612,12 @@ const s = StyleSheet.create({
   actionRow: {
     flexDirection: 'row', alignItems: 'center', gap: 12,
     paddingVertical: 14, borderBottomWidth: 1,
-    borderBottomColor: 'rgba(79,110,247,0.08)',
+    borderBottomColor: 'rgba(201,168,76,0.08)',
   },
   actionIcon: { fontSize: 22 },
   actionLabel: { fontSize: 14, color: '#fff', fontWeight: '600', marginBottom: 2 },
   actionSub: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
-  actionArrow: { color: '#4F6EF7', fontSize: 18, fontWeight: 'bold' },
+  actionArrow: { color: '#C9A84C', fontSize: 18, fontWeight: 'bold' },
 
   // Logout
   logoutBtn: {

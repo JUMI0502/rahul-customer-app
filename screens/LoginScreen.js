@@ -206,8 +206,8 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
 
           {/* CUSTOMER CARD */}
           <TouchableOpacity style={s.roleCard} onPress={() => goToMode('customer')} activeOpacity={0.8}>
-            <View style={[s.roleIconBox, { backgroundColor: 'rgba(79,110,247,0.12)' }]}>
-              <Ionicons name="bag-handle-outline" size={26} color="#4F6EF7" />
+            <View style={[s.roleIconBox, { backgroundColor: 'rgba(201,168,76,0.12)' }]}>
+              <Ionicons name="bag-handle-outline" size={26} color="#C9A84C" />
             </View>
             <View style={s.roleInfo}>
               <Text style={s.roleTitle}>Customer</Text>
@@ -215,14 +215,14 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               <Text style={s.roleTe}>స్పేర్ పార్ట్స్ కొనండి</Text>
               <View style={s.roleTagRow}>
                 {['Free Account', 'All Bikes', 'Fast Pickup'].map((tag, i) => (
-                  <View key={i} style={[s.roleTag, { backgroundColor: 'rgba(79,110,247,0.1)' }]}>
-                    <Text style={[s.roleTagText, { color: '#4F6EF7' }]}>{tag}</Text>
+                  <View key={i} style={[s.roleTag, { backgroundColor: 'rgba(201,168,76,0.1)' }]}>
+                    <Text style={[s.roleTagText, { color: '#C9A84C' }]}>{tag}</Text>
                   </View>
                 ))}
               </View>
             </View>
             <View style={s.roleArrow}>
-              <Ionicons name="chevron-forward" size={18} color="#4F6EF7" />
+              <Ionicons name="chevron-forward" size={18} color="#C9A84C" />
             </View>
           </TouchableOpacity>
 
@@ -280,8 +280,8 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
 
             {/* HEADER */}
             <View style={s.formHeader}>
-              <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(79,110,247,0.1)', borderColor: 'rgba(79,110,247,0.3)' }]}>
-                <Ionicons name="bag-handle-outline" size={32} color="#4F6EF7" />
+              <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(201,168,76,0.1)', borderColor: 'rgba(201,168,76,0.3)' }]}>
+                <Ionicons name="bag-handle-outline" size={32} color="#C9A84C" />
               </View>
               <Text style={s.formTitle}>Customer Login</Text>
               <Text style={s.formSub}>Enter once · Saved for next time</Text>
@@ -336,7 +336,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             </View>
 
             <TouchableOpacity
-              style={[s.submitBtn, { backgroundColor: '#4F6EF7' }, (!name || phone.length < 10 || loading) && { opacity: 0.4 }]}
+              style={[s.submitBtn, { backgroundColor: '#C9A84C' }, (!name || phone.length < 10 || loading) && { opacity: 0.4 }]}
               onPress={handleCustomerContinue}
               disabled={!name || phone.length < 10 || loading}>
               {loading
@@ -365,8 +365,8 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             </TouchableOpacity>
 
             <View style={s.formHeader}>
-              <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(79,110,247,0.1)', borderColor: 'rgba(79,110,247,0.3)' }]}>
-                <Ionicons name="keypad-outline" size={32} color="#4F6EF7" />
+              <View style={[s.formHeaderIcon, { backgroundColor: 'rgba(201,168,76,0.1)', borderColor: 'rgba(201,168,76,0.3)' }]}>
+                <Ionicons name="keypad-outline" size={32} color="#C9A84C" />
               </View>
               <Text style={s.formTitle}>{isNew ? 'Create Your PIN' : 'Enter Your PIN'}</Text>
               <Text style={s.formSub}>
@@ -410,7 +410,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
             </View>
 
             <TouchableOpacity
-              style={[s.submitBtn, { backgroundColor: '#4F6EF7' },
+              style={[s.submitBtn, { backgroundColor: '#C9A84C' },
                 (isNew ? (pin.length !== 4 || pinConfirm.length !== 4) : pin.length !== 4) && { opacity: 0.4 }]}
               onPress={isNew ? handleCreatePin : handleVerifyPin}
               disabled={loading || (isNew ? (pin.length !== 4 || pinConfirm.length !== 4) : pin.length !== 4)}>
@@ -635,8 +635,8 @@ const s = StyleSheet.create({
     backgroundColor: '#0D1F3C', borderRadius: 20,
     padding: 18, flexDirection: 'row', alignItems: 'center',
     gap: 14, marginBottom: 12, borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.25)',
-    shadowColor: '#4F6EF7', shadowOffset: { width: 0, height: 2 },
+    borderColor: 'rgba(201,168,76,0.25)',
+    shadowColor: '#C9A84C', shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1, shadowRadius: 6, elevation: 4,
   },
   mechCard: {
@@ -650,13 +650,13 @@ const s = StyleSheet.create({
   roleInfo: { flex: 1 },
   roleTitle: { fontSize: 18, fontWeight: 'bold', color: '#fff', marginBottom: 2 },
   roleSub: { fontSize: 12, color: 'rgba(255,255,255,0.5)', marginBottom: 2 },
-  roleTe: { fontSize: 11, color: 'rgba(79,110,247,0.5)', marginBottom: 8 },
+  roleTe: { fontSize: 11, color: 'rgba(201,168,76,0.5)', marginBottom: 8 },
   roleTagRow: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
   roleTag: { borderRadius: 20, paddingHorizontal: 8, paddingVertical: 3 },
   roleTagText: { fontSize: 10, fontWeight: 'bold' },
   roleArrow: {
     width: 36, height: 36, borderRadius: 18,
-    backgroundColor: 'rgba(79,110,247,0.1)',
+    backgroundColor: 'rgba(201,168,76,0.1)',
     alignItems: 'center', justifyContent: 'center',
   },
 
@@ -704,7 +704,7 @@ const s = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center',
     backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: 14,
     paddingHorizontal: 14, paddingVertical: 14,
-    borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)', gap: 10,
+    borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)', gap: 10,
   },
   inputIcon: { fontSize: 15, color: 'rgba(255,255,255,0.35)', fontWeight: 'bold', minWidth: 28 },
   inputField: { flex: 1, color: '#fff', fontSize: 16 },
