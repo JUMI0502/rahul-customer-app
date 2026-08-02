@@ -145,7 +145,7 @@ const navStyles = StyleSheet.create({
   bar: {
     flexDirection: 'row', backgroundColor: '#0E0E1C',
     borderTopWidth: 1,
-    borderTopColor: 'rgba(79,110,247,0.15)',
+    borderTopColor: 'rgba(201,168,76,0.15)',
     paddingBottom: 6, paddingTop: 8,
   },
   tab: { flex: 1, alignItems: 'center', paddingVertical: 2 },
@@ -164,7 +164,7 @@ const navStyles = StyleSheet.create({
   labelActive: { color: '#C9A84C' },
   dot: {
     width: 4, height: 4, borderRadius: 2,
-    backgroundColor: '#4F6EF7', marginTop: 2,
+    backgroundColor: '#C9A84C', marginTop: 2,
   },
 });
 
@@ -209,7 +209,7 @@ const skStyles = StyleSheet.create({
     backgroundColor: '#0E0E1C', borderRadius: 16, padding: 14,
     flexDirection: 'row', alignItems: 'center',
     marginBottom: 8, gap: 12, borderWidth: 1,
-    borderColor: 'rgba(79,110,247,0.08)',
+    borderColor: 'rgba(201,168,76,0.08)',
   },
   icon: {
     width: 44, height: 44, borderRadius: 12,
@@ -747,7 +747,7 @@ export default function MainApp({
     {
       icon: 'search', label: 'Browse Parts',
       labelTe: 'పార్ట్స్ చూడండి',
-      color: '#4F6EF7', bg: 'rgba(79,110,247,0.15)',
+      color: '#C9A84C', bg: 'rgba(201,168,76,0.15)',
       action: () => setTab('browse')
     },
     {
@@ -840,7 +840,7 @@ export default function MainApp({
           )}
           {loyaltyPoints > 0 && (
             <View style={[s.pointsTag, { flexDirection: 'row', alignItems: 'center', gap: 4 }]}>
-              <Ionicons name="diamond-outline" size={11} color={s.pointsTagText.color || '#4F6EF7'} />
+              <Ionicons name="diamond-outline" size={11} color={s.pointsTagText.color || '#C9A84C'} />
               <Text style={s.pointsTagText}>{loyaltyPoints}</Text>
             </View>
           )}
@@ -1002,7 +1002,7 @@ export default function MainApp({
                 refreshing={refreshing}
                 onRefresh={onRefresh}
                 tintColor="#C9A84C"
-                colors={['#4F6EF7']}
+                colors={['#C9A84C']}
               />
             }
           >
@@ -1874,14 +1874,14 @@ export default function MainApp({
 
             {/* REFER A FRIEND */}
             <View style={s.rewardsSummaryCard}>
-              <Ionicons name="people" size={28} color="#4F6EF7" />
+              <Ionicons name="people" size={28} color="#C9A84C" />
               <Text style={[s.rewardsSummaryLabel, { marginTop: 8 }]}>REFER A FRIEND</Text>
               <Text style={s.rewardsSummaryHint}>
                 Share your phone number with friends. When they place their first order and mention it,
                 you both get bonus points automatically!
               </Text>
               <TouchableOpacity
-                style={[s.confirmWaBtn, { marginTop: 14, backgroundColor: '#4F6EF7' }]}
+                style={[s.confirmWaBtn, { marginTop: 14, backgroundColor: '#C9A84C' }]}
                 onPress={() => {
                   const msg = `Hey! Check out New Rahul Auto Spares for genuine bike parts in Nandyal. Mention my number ${customer?.phone} when you order for a bonus!`;
                   Linking.openURL(`https://wa.me/?text=${encodeURIComponent(msg)}`);
@@ -2235,7 +2235,7 @@ export default function MainApp({
                 }}
               >
                 <Text style={{
-                  color: '#4F6EF7', fontSize: 12
+                  color: '#C9A84C', fontSize: 12
                 }}>
                   Read All
                 </Text>
@@ -2559,12 +2559,12 @@ const os = StyleSheet.create({
   centerBox: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 40 },
   loadingText: { color: 'rgba(255,255,255,0.4)', fontSize: 14 },
   emptyText: { fontSize: 16, color: 'rgba(255,255,255,0.4)', textAlign: 'center' },
-  filterRow: { flexDirection: 'row', padding: 12, gap: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(79,110,247,0.15)' },
-  filterBtn: { flex: 1, paddingVertical: 8, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
-  filterBtnActive: { backgroundColor: '#4F6EF7', borderColor: '#4F6EF7' },
+  filterRow: { flexDirection: 'row', padding: 12, gap: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(201,168,76,0.15)' },
+  filterBtn: { flex: 1, paddingVertical: 8, borderRadius: 10, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
+  filterBtnActive: { backgroundColor: '#C9A84C', borderColor: '#C9A84C' },
   filterText: { fontSize: 13, color: 'rgba(255,255,255,0.4)', fontWeight: '700' },
   filterTextActive: { color: '#fff' },
-  orderCard: { backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, marginBottom: 14, borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
+  orderCard: { backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, marginBottom: 14, borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
   orderHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 14 },
   orderId: { fontSize: 18, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
   orderPickup: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
@@ -2576,14 +2576,14 @@ const os = StyleSheet.create({
   readyText: { color: '#4ADE80', fontWeight: 'bold', fontSize: 13 },
   timeline: { flexDirection: 'row', marginBottom: 14 },
   step: { flex: 1, alignItems: 'center', position: 'relative' },
-  stepLine: { position: 'absolute', top: 18, right: '50%', left: '-50%', height: 2, backgroundColor: 'rgba(79,110,247,0.1)' },
-  stepIcon: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', marginBottom: 6, zIndex: 1, borderWidth: 2, borderColor: 'rgba(79,110,247,0.2)', backgroundColor: '#0E0E1C' },
+  stepLine: { position: 'absolute', top: 18, right: '50%', left: '-50%', height: 2, backgroundColor: 'rgba(201,168,76,0.1)' },
+  stepIcon: { width: 36, height: 36, borderRadius: 18, alignItems: 'center', justifyContent: 'center', marginBottom: 6, zIndex: 1, borderWidth: 2, borderColor: 'rgba(201,168,76,0.2)', backgroundColor: '#0E0E1C' },
   stepEmoji: { fontSize: 14 },
   stepLabel: { fontSize: 9, fontWeight: 'bold', color: '#fff', textAlign: 'center' },
-  qrSection: { alignItems: 'center', paddingTop: 12, borderTopWidth: 1, borderTopColor: 'rgba(79,110,247,0.15)' },
+  qrSection: { alignItems: 'center', paddingTop: 12, borderTopWidth: 1, borderTopColor: 'rgba(201,168,76,0.15)' },
   qrTitle: { fontSize: 12, color: 'rgba(255,255,255,0.4)', marginBottom: 10 },
   qrImage: { width: 140, height: 140, borderRadius: 8, marginBottom: 8 },
-  qrId: { fontSize: 16, fontWeight: 'bold', color: '#4F6EF7', letterSpacing: 2 },
+  qrId: { fontSize: 16, fontWeight: 'bold', color: '#C9A84C', letterSpacing: 2 },
 });
 
 // ── MAIN STYLES ──
@@ -2844,7 +2844,7 @@ const s = StyleSheet.create({
   greeting: { padding: 20, paddingBottom: 16, flexDirection: 'row', alignItems: 'flex-start', borderBottomWidth: 1, borderBottomColor: 'rgba(255,255,255,0.05)' },
   greetName: { fontSize: 24, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
   greetSub: { fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 10 },
-  vehicleChip: { backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 5, alignSelf: 'flex-start', borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
+  vehicleChip: { backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 5, alignSelf: 'flex-start', borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
   vehicleChipText: { color: '#C9A84C', fontSize: 12, fontWeight: '700', letterSpacing: 0.3 },
   mechBadge: { backgroundColor: 'rgba(255,193,7,0.1)', borderRadius: 12, padding: 10, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(255,193,7,0.2)' },
   mechBadgeIcon: { fontSize: 24 },
@@ -2878,7 +2878,7 @@ const s = StyleSheet.create({
   promoSub: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
   sectionHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, paddingBottom: 10 },
   sectionTitle: { fontSize: 13, fontWeight: '700', color: 'rgba(255,255,255,0.9)', letterSpacing: 1.5, textTransform: 'uppercase' },
-  seeAll: { fontSize: 13, color: '#4F6EF7', fontWeight: 'bold' },
+  seeAll: { fontSize: 13, color: '#C9A84C', fontWeight: 'bold' },
   hScroll: { paddingHorizontal: 16, paddingBottom: 16, gap: 10 },
   miniCard: { backgroundColor: '#0D1F3C', borderRadius: 12, padding: 14, width: 140, borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)', position: 'relative' },
   miniHeart: { position: 'absolute', top: 8, right: 8 },
@@ -2886,27 +2886,27 @@ const s = StyleSheet.create({
   miniCardName: { fontSize: 12, fontWeight: 'bold', color: '#fff', marginBottom: 4, lineHeight: 16 },
   miniCardMrp: { fontSize: 10, color: 'rgba(255,255,255,0.25)', textDecorationLine: 'line-through' },
   miniCardPrice: { fontSize: 16, fontWeight: 'bold', color: '#FFC107', marginBottom: 8 },
-  miniAddBtn: { backgroundColor: '#4F6EF7', borderRadius: 8, padding: 6, alignItems: 'center' },
+  miniAddBtn: { backgroundColor: '#C9A84C', borderRadius: 8, padding: 6, alignItems: 'center' },
   miniAddText: { color: '#fff', fontSize: 11, fontWeight: 'bold' },
-  hoursCard: { margin: 16, backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  hoursCard: { margin: 16, backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   hoursTitle: { fontSize: 14, fontWeight: 'bold', color: '#fff', marginBottom: 12 },
-  hoursRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(79,110,247,0.08)' },
+  hoursRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: 'rgba(201,168,76,0.08)' },
   hoursDay: { fontSize: 13, color: 'rgba(255,255,255,0.5)' },
   hoursTime: { fontSize: 13, color: '#fff', fontWeight: '600' },
   callBtn: { marginTop: 12, backgroundColor: 'rgba(74,222,128,0.1)', borderRadius: 12, padding: 12, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(74,222,128,0.2)' },
   callBtnText: { color: '#4ADE80', fontSize: 14, fontWeight: 'bold' },
   browseHeader: { marginBottom: 8 },
   countText: { fontSize: 11, color: 'rgba(255,255,255,0.25)', paddingBottom: 4 },
-  vehicleFilterBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 4, alignSelf: 'flex-start', borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)', marginBottom: 8 },
-  vehicleFilterText: { color: '#4F6EF7', fontSize: 12, fontWeight: 'bold' },
+  vehicleFilterBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 20, paddingHorizontal: 12, paddingVertical: 4, alignSelf: 'flex-start', borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)', marginBottom: 8 },
+  vehicleFilterText: { color: '#C9A84C', fontSize: 12, fontWeight: 'bold' },
   clearVehicle: { color: '#FF4757', fontSize: 12, fontWeight: 'bold' },
-  productCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)', marginBottom: 8, gap: 10 },
+  productCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)', marginBottom: 8, gap: 10 },
   productLeft: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 10 },
-  productIconBox: { width: 44, height: 44, borderRadius: 12, backgroundColor: 'rgba(79,110,247,0.08)', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(79,110,247,0.12)' },
+  productIconBox: { width: 44, height: 44, borderRadius: 12, backgroundColor: 'rgba(201,168,76,0.08)', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(201,168,76,0.12)' },
   productIconText: { fontSize: 10, fontWeight: '800', letterSpacing: 0.5 },
   productName: { fontSize: 13, fontWeight: '700', color: '#fff', marginBottom: 3, lineHeight: 18 },
-  productNameTe: { fontSize: 10, color: 'rgba(79,110,247,0.5)', marginBottom: 2 },
-  productSku: { fontSize: 9, color: 'rgba(79,110,247,0.5)', letterSpacing: 1, marginBottom: 4 },
+  productNameTe: { fontSize: 10, color: 'rgba(201,168,76,0.5)', marginBottom: 2 },
+  productSku: { fontSize: 9, color: 'rgba(201,168,76,0.5)', letterSpacing: 1, marginBottom: 4 },
   stockBadge: { backgroundColor: 'rgba(74,222,128,0.08)', borderRadius: 4, paddingHorizontal: 8, paddingVertical: 3, alignSelf: 'flex-start' },
   stockBadgeOut: { backgroundColor: 'rgba(255,71,87,0.08)', borderColor: 'rgba(255,71,87,0.2)' },
   stockText: { fontSize: 9, color: '#4ADE80' },
@@ -2915,24 +2915,24 @@ const s = StyleSheet.create({
   productMrp: { fontSize: 10, color: 'rgba(255,255,255,0.25)', textDecorationLine: 'line-through' },
   productPrice: { fontSize: 17, fontWeight: 'bold', color: '#FFC107' },
   mechDiscount: { fontSize: 9, color: '#FFC107' },
-  addBtn: { backgroundColor: '#4F6EF7', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 5 },
+  addBtn: { backgroundColor: '#C9A84C', borderRadius: 8, paddingHorizontal: 10, paddingVertical: 5 },
   addBtnText: { color: '#07111F', fontSize: 11, fontWeight: '800', letterSpacing: 0.3 },
   emptyBox: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 40, gap: 12 },
   emptyText: { fontSize: 16, color: 'rgba(255,255,255,0.4)', fontWeight: 'bold' },
-  clearSearchText: { color: '#4F6EF7', fontWeight: 'bold' },
-  browseBtn: { backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 14, paddingHorizontal: 20, paddingVertical: 12, borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
-  browseBtnText: { color: '#4F6EF7', fontWeight: 'bold' },
-  cartCustomer: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  clearSearchText: { color: '#C9A84C', fontWeight: 'bold' },
+  browseBtn: { backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 14, paddingHorizontal: 20, paddingVertical: 12, borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
+  browseBtnText: { color: '#C9A84C', fontWeight: 'bold' },
+  cartCustomer: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, marginBottom: 12, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   cartCustomerName: { fontSize: 15, fontWeight: 'bold', color: '#fff', marginBottom: 2 },
   cartCustomerPhone: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
-  cartItem: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)', marginBottom: 8, gap: 10 },
+  cartItem: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)', marginBottom: 8, gap: 10 },
   cartItemIcon: { fontSize: 26 },
   cartItemName: { fontSize: 13, fontWeight: 'bold', color: '#fff', marginBottom: 8 },
   cartItemPrice: { fontSize: 18, fontWeight: 'bold', color: '#FFC107' },
   qtyRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   qtySelector: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 },
-  qtyBtn: { width: 36, height: 36, backgroundColor: '#0E0E1C', borderRadius: 10, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(79,110,247,0.3)' },
-  qtyBtnText: { fontSize: 18, color: '#4F6EF7', fontWeight: 'bold' },
+  qtyBtn: { width: 36, height: 36, backgroundColor: '#0E0E1C', borderRadius: 10, alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(201,168,76,0.3)' },
+  qtyBtnText: { fontSize: 18, color: '#C9A84C', fontWeight: 'bold' },
   qtyNum: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
   qtyTotal: { fontSize: 16, color: '#FFC107', fontWeight: 'bold' },
   loyaltyToggle: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'rgba(255,193,7,0.05)', borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,193,7,0.2)' },
@@ -2942,11 +2942,11 @@ const s = StyleSheet.create({
   toggleSwitchOn: { backgroundColor: '#4ADE80' },
   toggleKnob: { width: 18, height: 18, borderRadius: 9, backgroundColor: 'rgba(255,255,255,0.3)', alignSelf: 'flex-start' },
   toggleKnobOn: { backgroundColor: '#fff', alignSelf: 'flex-end' },
-  pickupCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  pickupCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   pickupTitle: { fontSize: 14, fontWeight: 'bold', color: '#fff', marginBottom: 12 },
   pickupOptions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  pickupChip: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
-  pickupChipActive: { backgroundColor: '#4F6EF7', borderColor: '#4F6EF7' },
+  pickupChip: { paddingHorizontal: 14, paddingVertical: 8, borderRadius: 20, borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
+  pickupChipActive: { backgroundColor: '#C9A84C', borderColor: '#C9A84C' },
   pickupChipText: { fontSize: 12, color: 'rgba(255,255,255,0.4)', fontWeight: '600' },
   pickupChipTextActive: { color: '#fff' },
   summaryCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1, borderColor: 'rgba(255,193,7,0.15)' },
@@ -2958,23 +2958,23 @@ const s = StyleSheet.create({
   summaryTotalValue: { fontSize: 22, fontWeight: 'bold', color: '#FFC107' },
   orderBtn: { backgroundColor: '#FF4757', borderRadius: 18, padding: 16, alignItems: 'center', marginBottom: 10 },
   orderBtnText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
-  upiBtn: { backgroundColor: 'rgba(79,110,247,0.12)', borderRadius: 18, padding: 14, alignItems: 'center', marginBottom: 10, borderWidth: 1, borderColor: 'rgba(79,110,247,0.3)' },
-  upiBtnText: { color: '#4F6EF7', fontSize: 14, fontWeight: 'bold' },
+  upiBtn: { backgroundColor: 'rgba(201,168,76,0.12)', borderRadius: 18, padding: 14, alignItems: 'center', marginBottom: 10, borderWidth: 1, borderColor: 'rgba(201,168,76,0.3)' },
+  upiBtnText: { color: '#C9A84C', fontSize: 14, fontWeight: 'bold' },
   callStoreBtn: { backgroundColor: 'rgba(74,222,128,0.1)', borderRadius: 18, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: 'rgba(74,222,128,0.2)' },
   callStoreBtnText: { color: '#4ADE80', fontSize: 14, fontWeight: 'bold' },
   profileBtn: {
     backgroundColor: '#0E0E1C', borderRadius: 16, padding: 14,
     flexDirection: 'row', alignItems: 'center', gap: 12,
-    marginBottom: 14, borderWidth: 1, borderColor: 'rgba(79,110,247,0.3)',
+    marginBottom: 14, borderWidth: 1, borderColor: 'rgba(201,168,76,0.3)',
   },
   profileBtnAvatar: {
     width: 48, height: 48, borderRadius: 24,
-    backgroundColor: '#4F6EF7', alignItems: 'center', justifyContent: 'center',
+    backgroundColor: '#C9A84C', alignItems: 'center', justifyContent: 'center',
   },
   profileBtnAvatarText: { fontSize: 22, color: '#fff', fontWeight: 'bold' },
   profileBtnName: { fontSize: 15, fontWeight: 'bold', color: '#fff', marginBottom: 2 },
   profileBtnPhone: { fontSize: 12, color: 'rgba(255,255,255,0.4)' },
-  profileBtnArrow: { fontSize: 11, color: '#4F6EF7', fontWeight: 'bold' },
+  profileBtnArrow: { fontSize: 11, color: '#C9A84C', fontWeight: 'bold' },
   storeIconBox: {
     width: 52, height: 52, borderRadius: 14,
     backgroundColor: 'rgba(201,168,76,0.1)',
@@ -3005,24 +3005,24 @@ const s = StyleSheet.create({
   serviceLabel: { fontSize: 14, fontWeight: '600', color: '#fff', marginBottom: 2 },
   serviceSub: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
   emptySubText: { fontSize: 12, color: 'rgba(255,255,255,0.3)', textAlign: 'center', marginTop: 4 },
-  storeCard: { backgroundColor: '#0E0E1C', borderRadius: 16, padding: 20, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  storeCard: { backgroundColor: '#0E0E1C', borderRadius: 16, padding: 20, alignItems: 'center', marginBottom: 16, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   storeIcon: { fontSize: 48, marginBottom: 10 },
   storeName: { fontSize: 17, fontWeight: '800', color: '#fff', marginBottom: 4, letterSpacing: 0.5 },
   storeAddr: { fontSize: 13, color: 'rgba(255,255,255,0.4)' },
-  storeRow: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  storeRow: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   storeRowLabel: { fontSize: 14, color: 'rgba(255,255,255,0.5)' },
   storeRowValue: { fontSize: 14, color: '#fff', fontWeight: '600' },
-  storeFeatures: { marginTop: 16, backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)' },
+  storeFeatures: { marginTop: 16, backgroundColor: '#0E0E1C', borderRadius: 16, padding: 16, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)' },
   storeFeatTitle: { fontSize: 14, fontWeight: 'bold', color: '#fff', marginBottom: 12 },
-  storeFeatureBtn: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: 'rgba(79,110,247,0.08)' },
+  storeFeatureBtn: { flexDirection: 'row', alignItems: 'center', gap: 12, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: 'rgba(201,168,76,0.08)' },
   storeFeatureBtnIcon: { fontSize: 22 },
   storeFeatureBtnText: { flex: 1, fontSize: 14, color: '#fff', fontWeight: '600' },
-  storeFeatureBtnArrow: { fontSize: 16, color: '#4F6EF7' },
+  storeFeatureBtnArrow: { fontSize: 16, color: '#C9A84C' },
   floatingWA: { position: 'absolute', bottom: 70, right: 16, width: 52, height: 52, borderRadius: 26, backgroundColor: '#25D366', alignItems: 'center', justifyContent: 'center', elevation: 8, zIndex: 999, shadowColor: '#25D366', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.4, shadowRadius: 6 },
   floatingWAIcon: { fontSize: 26 },
-  modalHeader: { backgroundColor: '#0E0E1C', padding: 16, flexDirection: 'row', alignItems: 'center', gap: 12, borderBottomWidth: 1, borderBottomColor: 'rgba(79,110,247,0.15)' },
-  modalBack: { backgroundColor: 'rgba(79,110,247,0.1)', borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8, borderWidth: 1, borderColor: 'rgba(79,110,247,0.2)' },
-  modalBackText: { color: '#4F6EF7', fontSize: 14, fontWeight: 'bold' },
+  modalHeader: { backgroundColor: '#0E0E1C', padding: 16, flexDirection: 'row', alignItems: 'center', gap: 12, borderBottomWidth: 1, borderBottomColor: 'rgba(201,168,76,0.15)' },
+  modalBack: { backgroundColor: 'rgba(201,168,76,0.1)', borderRadius: 10, paddingHorizontal: 14, paddingVertical: 8, borderWidth: 1, borderColor: 'rgba(201,168,76,0.2)' },
+  modalBackText: { color: '#C9A84C', fontSize: 14, fontWeight: 'bold' },
   modalTitle: { flex: 1, fontSize: 16, fontWeight: 'bold', color: '#fff' },
   modalActions: { flexDirection: 'row', gap: 10, alignItems: 'center' },
   heroBox: { height: 180, backgroundColor: '#0E0E1C', alignItems: 'center', justifyContent: 'center' },
@@ -3030,7 +3030,7 @@ const s = StyleSheet.create({
   oemBadge: { position: 'absolute', bottom: 12, backgroundColor: 'rgba(74,222,128,0.12)', borderRadius: 20, paddingHorizontal: 14, paddingVertical: 5, borderWidth: 1, borderColor: 'rgba(74,222,128,0.3)' },
   oemText: { fontSize: 12, color: '#4ADE80', fontWeight: 'bold' },
   detailName: { fontSize: 22, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
-  detailNameTe: { fontSize: 14, color: 'rgba(79,110,247,0.6)', marginBottom: 6 },
+  detailNameTe: { fontSize: 14, color: 'rgba(201,168,76,0.6)', marginBottom: 6 },
   detailSku: { fontSize: 11, color: 'rgba(255,255,255,0.3)', letterSpacing: 2, marginBottom: 14 },
   mechBox: { backgroundColor: 'rgba(255,193,7,0.08)', borderRadius: 12, padding: 12, marginBottom: 14, borderWidth: 1, borderColor: 'rgba(255,193,7,0.2)' },
   mechBoxText: { color: '#FFC107', fontWeight: 'bold', fontSize: 13 },
@@ -3044,18 +3044,18 @@ const s = StyleSheet.create({
   stockRow: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 16 },
   stockDot: { width: 10, height: 10, borderRadius: 5 },
   stockLabel: { fontSize: 14, fontWeight: '600' },
-  notifCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', gap: 12, borderWidth: 1, borderColor: 'rgba(79,110,247,0.15)', marginBottom: 10 },
-  notifCardUnread: { borderColor: 'rgba(79,110,247,0.4)' },
+  notifCard: { backgroundColor: '#0E0E1C', borderRadius: 14, padding: 14, flexDirection: 'row', alignItems: 'center', gap: 12, borderWidth: 1, borderColor: 'rgba(201,168,76,0.15)', marginBottom: 10 },
+  notifCardUnread: { borderColor: 'rgba(201,168,76,0.4)' },
   notifIcon2: { fontSize: 26 },
   notifTitle2: { fontSize: 14, fontWeight: 'bold', color: '#fff', marginBottom: 2 },
   notifBody2: { fontSize: 12, color: 'rgba(255,255,255,0.5)' },
   notifTime: { fontSize: 10, color: 'rgba(255,255,255,0.25)', marginTop: 2 },
-  unreadDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#4F6EF7' },
+  unreadDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: '#C9A84C' },
   ratingOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.8)', alignItems: 'center', justifyContent: 'center', padding: 30 },
   ratingCard: { backgroundColor: '#0E0E1C', borderRadius: 24, padding: 28, width: '100%', alignItems: 'center', borderWidth: 1, borderColor: 'rgba(255,193,7,0.25)' },
   ratingEmoji: { fontSize: 48, marginBottom: 12 },
   ratingTitle: { fontSize: 22, fontWeight: 'bold', color: '#fff', marginBottom: 4 },
-  ratingTe: { fontSize: 13, color: 'rgba(79,110,247,0.5)', marginBottom: 20 },
+  ratingTe: { fontSize: 13, color: 'rgba(201,168,76,0.5)', marginBottom: 20 },
   starsRow: { flexDirection: 'row', gap: 8, marginBottom: 24 },
   star: { fontSize: 36 },
   ratingBtns: { flexDirection: 'row', gap: 12, width: '100%' },
