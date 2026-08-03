@@ -909,10 +909,7 @@ export default function MainApp({
             {/* DROPDOWN LIST */}
             {showCategoryDropdown && (
               <View style={s.dropdownList}>
-                <ScrollView
-                  style={{ maxHeight: 300 }}
-                  nestedScrollEnabled
-                  showsVerticalScrollIndicator={false}>
+                <View>
                   {[
                     { id: 'all', label: 'All Parts', group: '' },
                     { id: 'OIL', label: 'Engine Oils', group: 'GENERAL' },
@@ -963,7 +960,7 @@ export default function MainApp({
                       </TouchableOpacity>
                     );
                   })}
-                </ScrollView>
+                </View>
               </View>
             )}
           </View>
