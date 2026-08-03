@@ -906,63 +906,73 @@ export default function MainApp({
               />
             </TouchableOpacity>
 
-            {/* DROPDOWN LIST */}
-            {showCategoryDropdown && (
-              <View style={s.dropdownList}>
-                <View>
-                  {[
-                    { id: 'all', label: 'All Parts', group: '' },
-                    { id: 'OIL', label: 'Engine Oils', group: 'GENERAL' },
-                    { id: 'HRO-SPL', label: 'Hero Splendor+', group: 'HERO' },
-                    { id: 'HRO-HFD', label: 'Hero HF Deluxe', group: 'HERO' },
-                    { id: 'HRO-PAS', label: 'Hero Passion Pro', group: 'HERO' },
-                    { id: 'HRO-GLA', label: 'Hero Glamour', group: 'HERO' },
-                    { id: 'HRO-XTR', label: 'Hero Xtreme 160R', group: 'HERO' },
-                    { id: 'HND-CBS', label: 'Honda CB Shine', group: 'HONDA' },
-                    { id: 'HND-ACT', label: 'Honda Activa', group: 'HONDA' },
-                    { id: 'HND-SP1', label: 'Honda SP 125', group: 'HONDA' },
-                    { id: 'HND-DYG', label: 'Honda Dream Yuga', group: 'HONDA' },
-                    { id: 'TVS-APR', label: 'TVS Apache', group: 'TVS' },
-                    { id: 'TVS-JPT', label: 'TVS Jupiter', group: 'TVS' },
-                    { id: 'BAJ-P15', label: 'Bajaj Pulsar 150', group: 'BAJAJ' },
-                    { id: 'BAJ-PLT', label: 'Bajaj Platina', group: 'BAJAJ' },
-                  ].reduce((acc, item) => {
-                    // Group header
-                    if (item.group && (!acc.length || acc[acc.length-1].group !== item.group)) {
-                      acc.push({ isHeader: true, group: item.group });
-                    }
-                    acc.push(item);
-                    return acc;
-                  }, []).map((item, i) => {
-                    if (item.isHeader) {
+            {/* DROPDOWN LIST - rendered as a Modal so its ScrollView is
+                fully independent of the outer FlatList's touch handling,
+                avoiding the Android nested-scroll tap conflict entirely */}
+            <Modal
+              visible={showCategoryDropdown}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setShowCategoryDropdown(false)}>
+              <TouchableOpacity
+                style={s.dropdownBackdrop}
+                activeOpacity={1}
+                onPress={() => setShowCategoryDropdown(false)}>
+                <View style={s.dropdownModalList}>
+                  <ScrollView showsVerticalScrollIndicator={false}>
+                    {[
+                      { id: 'all', label: 'All Parts', group: '' },
+                      { id: 'OIL', label: 'Engine Oils', group: 'GENERAL' },
+                      { id: 'HRO-SPL', label: 'Hero Splendor+', group: 'HERO' },
+                      { id: 'HRO-HFD', label: 'Hero HF Deluxe', group: 'HERO' },
+                      { id: 'HRO-PAS', label: 'Hero Passion Pro', group: 'HERO' },
+                      { id: 'HRO-GLA', label: 'Hero Glamour', group: 'HERO' },
+                      { id: 'HRO-XTR', label: 'Hero Xtreme 160R', group: 'HERO' },
+                      { id: 'HND-CBS', label: 'Honda CB Shine', group: 'HONDA' },
+                      { id: 'HND-ACT', label: 'Honda Activa', group: 'HONDA' },
+                      { id: 'HND-SP1', label: 'Honda SP 125', group: 'HONDA' },
+                      { id: 'HND-DYG', label: 'Honda Dream Yuga', group: 'HONDA' },
+                      { id: 'TVS-APR', label: 'TVS Apache', group: 'TVS' },
+                      { id: 'TVS-JPT', label: 'TVS Jupiter', group: 'TVS' },
+                      { id: 'BAJ-P15', label: 'Bajaj Pulsar 150', group: 'BAJAJ' },
+                      { id: 'BAJ-PLT', label: 'Bajaj Platina', group: 'BAJAJ' },
+                    ].reduce((acc, item) => {
+                      if (item.group && (!acc.length || acc[acc.length-1].group !== item.group)) {
+                        acc.push({ isHeader: true, group: item.group });
+                      }
+                      acc.push(item);
+                      return acc;
+                    }, []).map((item, i) => {
+                      if (item.isHeader) {
+                        return (
+                          <View key={`header-${item.group}`} style={s.dropdownGroupHeader}>
+                            <Text style={s.dropdownGroupLabel}>{item.group}</Text>
+                          </View>
+                        );
+                      }
+                      const isSelected = category === item.id;
                       return (
-                        <View key={`header-${item.group}`} style={s.dropdownGroupHeader}>
-                          <Text style={s.dropdownGroupLabel}>{item.group}</Text>
-                        </View>
+                        <TouchableOpacity
+                          key={item.id}
+                          style={[s.dropdownItem, isSelected && s.dropdownItemActive]}
+                          onPress={() => {
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                            setCategory(item.id);
+                            setShowCategoryDropdown(false);
+                          }}>
+                          <Text style={[s.dropdownItemText, isSelected && s.dropdownItemTextActive]}>
+                            {item.label}
+                          </Text>
+                          {isSelected && (
+                            <Ionicons name="checkmark" size={16} color="#C9A84C" />
+                          )}
+                        </TouchableOpacity>
                       );
-                    }
-                    const isSelected = category === item.id;
-                    return (
-                      <TouchableOpacity
-                        key={item.id}
-                        style={[s.dropdownItem, isSelected && s.dropdownItemActive]}
-                        onPress={() => {
-                          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                          setCategory(item.id);
-                          setShowCategoryDropdown(false);
-                        }}>
-                        <Text style={[s.dropdownItemText, isSelected && s.dropdownItemTextActive]}>
-                          {item.label}
-                        </Text>
-                        {isSelected && (
-                          <Ionicons name="checkmark" size={16} color="#C9A84C" />
-                        )}
-                      </TouchableOpacity>
-                    );
-                  })}
+                    })}
+                  </ScrollView>
                 </View>
-              </View>
-            )}
+              </TouchableOpacity>
+            </Modal>
           </View>
 
           {/* PART REQUEST BUTTON */}
@@ -2805,6 +2815,16 @@ const s = StyleSheet.create({
     shadowColor: '#000', shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.4, shadowRadius: 12, elevation: 10,
     zIndex: 1000,
+  },
+  dropdownBackdrop: {
+    flex: 1, backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center', alignItems: 'center', padding: 24,
+  },
+  dropdownModalList: {
+    width: '100%', maxHeight: '70%',
+    backgroundColor: '#0D1F3C', borderRadius: 16,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)',
+    overflow: 'hidden',
   },
   dropdownGroupHeader: {
     paddingHorizontal: 16, paddingTop: 12, paddingBottom: 4,
