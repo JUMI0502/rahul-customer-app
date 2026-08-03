@@ -404,7 +404,8 @@ export default function MainApp({
   const fetchLoyaltyPoints = async () => {
     try {
       const r = await fetch(
-        `${API_URL}/loyalty/${customer?.phone}`
+        `${API_URL}/loyalty/${customer?.phone}`,
+        { headers: { 'x-session-token': customer?.sessionToken || '' } }
       );
       const d = await r.json();
       setLoyaltyPoints(d.points || 0);
@@ -2381,7 +2382,8 @@ function OrdersTab({ customer, onCancelOrder }) {
   const fetchOrders = async () => {
     try {
       const r = await fetch(
-        `${API_URL}/orders/customer/${customer?.phone}`
+        `${API_URL}/orders/customer/${customer?.phone}`,
+        { headers: { 'x-session-token': customer?.sessionToken || '' } }
       );
       const d = await r.json();
       setOrders(d.orders || []);

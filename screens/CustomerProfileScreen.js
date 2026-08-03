@@ -468,7 +468,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
               { text: 'Cancel', style: 'cancel' },
               { text: 'Delete Forever', style: 'destructive', onPress: async () => {
                 try {
-                  const r = await fetch(`${API_URL}/customers/${customer?.phone}/account`, { method: 'DELETE' });
+                  const r = await fetch(`${API_URL}/customers/${customer?.phone}/account`, { method: 'DELETE', headers: { 'x-session-token': customer?.sessionToken || '' } });
                   if (!r.ok) throw new Error('failed');
                   await AsyncStorage.clear();
                   onLogout();

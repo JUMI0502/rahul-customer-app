@@ -104,7 +104,7 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
       setLoading(false);
       if (!d.verified) { setPinError('Incorrect PIN. Please try again.'); setPin(''); return; }
       await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-      const user = { name: d.name || name.trim(), phone: phone.trim(), type: 'customer' };
+      const user = { name: d.name || name.trim(), phone: phone.trim(), type: 'customer', sessionToken: d.session_token };
       await AsyncStorage.setItem('customer_profile', JSON.stringify(user));
       onCustomerLogin(user);
     } catch {
