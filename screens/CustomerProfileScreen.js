@@ -7,17 +7,19 @@ import { useState, useEffect } from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, Image,
   SafeAreaView, StatusBar, ScrollView, TextInput,
-  Alert, ActivityIndicator, Switch
+  Alert, ActivityIndicator, Switch, Linking
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
 const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
 const PROFILE_KEY = 'customer_profile';
+const WHATSAPP = '916300281504';
 
-export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints, onBack, onLogout }) {
+export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints, onBack, onLogout, onNavigateToOrders, onNavigateToRewards }) {
 
   // ── PROFILE STATE ──
   const [name, setName]           = useState(customer?.name || '');
@@ -231,6 +233,69 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             </View>
           </View>
         </LinearGradient>
+
+        {/* ── QUICK MENU ── */}
+        <View style={s.menuCard}>
+          <TouchableOpacity style={s.menuRow} onPress={() => onNavigateToOrders && onNavigateToOrders()}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="receipt-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>My Orders</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => onNavigateToRewards && onNavigateToRewards()}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="star-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>My Rewards</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
+            `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
+              `Hi! I'm ${name || customer?.name}, referring a friend to New Rahul Auto Spares. My number: ${phone || customer?.phone}`
+            )}`
+          )}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="people-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>Refer a Friend</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
+            `https://wa.me/${WHATSAPP}?text=Hi! I need help with something.`
+          )}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="headset-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>Customer Support</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
+            'https://rahul-auto-spares-backend.onrender.com/privacy-policy'
+          )}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="document-text-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>Privacy Policy</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+        </View>
+
+        {/* ── VISIT OUR STORE ── */}
+        <TouchableOpacity style={s.storeCard} onPress={() => Linking.openURL('tel:08514244944')}>
+          <View style={s.storeCardIcon}>
+            <Ionicons name="storefront-outline" size={22} color="#C9A84C" />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={s.storeCardTitle}>New Rahul Auto Spares</Text>
+            <Text style={s.storeCardSub}>Telugu Peta, Nandyal • Tap to call</Text>
+          </View>
+          <Ionicons name="call-outline" size={20} color="#C9A84C" />
+        </TouchableOpacity>
 
         {/* ── PERSONAL DETAILS ── */}
         <View style={s.card}>
@@ -524,6 +589,31 @@ const s = StyleSheet.create({
     alignItems: 'center', borderWidth: 1,
     borderColor: 'rgba(201,168,76,0.2)',
   },
+  menuCard: {
+    backgroundColor: '#0D1F3C', borderRadius: 16,
+    marginBottom: 14, borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)', overflow: 'hidden',
+  },
+  menuRow: {
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    paddingHorizontal: 16, paddingVertical: 14,
+  },
+  menuRowLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  menuRowText: { fontSize: 14, fontWeight: '600', color: '#fff' },
+  menuDivider: { height: 1, backgroundColor: 'rgba(255,255,255,0.06)', marginLeft: 48 },
+  storeCard: {
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    backgroundColor: 'rgba(201,168,76,0.08)', borderRadius: 16,
+    padding: 16, marginBottom: 14, borderWidth: 1,
+    borderColor: 'rgba(201,168,76,0.2)',
+  },
+  storeCardIcon: {
+    width: 40, height: 40, borderRadius: 20,
+    backgroundColor: 'rgba(201,168,76,0.15)',
+    alignItems: 'center', justifyContent: 'center',
+  },
+  storeCardTitle: { fontSize: 14, fontWeight: '700', color: '#fff', marginBottom: 2 },
+  storeCardSub: { fontSize: 12, color: 'rgba(255,255,255,0.5)' },
   avatarImage: { width: 72, height: 72, borderRadius: 36 },
   avatarEditBadge: {
     position: 'absolute', bottom: 0, right: 0,

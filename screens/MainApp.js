@@ -791,6 +791,8 @@ export default function MainApp({
       loyaltyPoints={loyaltyPoints}
       onBack={() => setShowProfile(false)}
       onLogout={onLogout}
+      onNavigateToOrders={() => { setShowProfile(false); setTab('orders'); }}
+      onNavigateToRewards={() => setShowRewards(true)}
     />
   );
   if (showBikeHealth) {
