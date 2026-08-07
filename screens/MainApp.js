@@ -106,7 +106,7 @@ function BottomNav({ active, onChange, cartCount, notifCount }) {
     { id: 'browse',  icon: 'search-outline',      label: 'Browse' },
     { id: 'cart',    icon: 'cart-outline',        label: 'Cart', badge: cartCount },
     { id: 'orders',  icon: 'receipt-outline',     label: 'Orders' },
-    { id: 'store',   icon: 'storefront-outline',  label: 'Store' },
+    { id: 'profile', icon: 'person-outline',      label: 'Profile' },
   ];
   return (
     <View style={navStyles.bar}>
@@ -764,12 +764,6 @@ export default function MainApp({
       action: () => setShowBikeHealth(true)
     },
     {
-      icon: 'storefront-outline', label: 'Store Info',
-      labelTe: 'స్టోర్ వివరాలు',
-      color: '#00B4D8', bg: 'rgba(0,180,216,0.15)',
-      action: () => setTab('store')
-    },
-    {
       icon: 'bookmark-outline', label: 'Saved Parts',
       labelTe: 'సేవ్ చేసినవి',
       color: '#EF4444', bg: 'rgba(239,68,68,0.15)',
@@ -793,6 +787,7 @@ export default function MainApp({
       onLogout={onLogout}
       onNavigateToOrders={() => { setShowProfile(false); setTab('orders'); }}
       onNavigateToRewards={() => setShowRewards(true)}
+      onNavigateToBikeHealth={() => { setShowProfile(false); setShowBikeHealth(true); }}
     />
   );
   if (showBikeHealth) {
@@ -1679,89 +1674,7 @@ export default function MainApp({
         )}
 
         {/* ══ STORE TAB ══ */}
-        {tab === 'store' && (
-          <ScrollView contentContainerStyle={{ padding: 20 }}>
 
-            {/* PROFILE BUTTON */}
-            <TouchableOpacity
-              style={s.profileBtn}
-              onPress={() => setShowProfile(true)}>
-              <View style={s.profileBtnAvatar}>
-                <Text style={s.profileBtnAvatarText}>
-                  {(customer?.name || '?')[0].toUpperCase()}
-                </Text>
-              </View>
-              <View style={{ flex: 1 }}>
-                <Text style={s.profileBtnName}>{customer?.name}</Text>
-                <Text style={s.profileBtnPhone}>+91 {customer?.phone}</Text>
-              </View>
-              <Ionicons name="create-outline" size={18} color="rgba(255,255,255,0.4)" />
-            </TouchableOpacity>
-
-            <View style={s.storeCard}>
-              <View style={s.storeIconBox}>
-                <Ionicons name="storefront" size={28} color="#C9A84C" />
-              </View>
-              <Text style={s.storeName}>
-                New Rahul Auto Spares
-              </Text>
-              <Text style={s.storeAddr}>
-                Telugu Peta, Nandyal · 518501
-              </Text>
-            </View>
-            <View style={{ backgroundColor: '#0D1F3C', borderRadius: 16, marginBottom: 14, overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(255,255,255,0.07)' }}>
-            {[
-              {
-                label: 'Phone', icon: 'call', value: '08514-244944',
-                action: () => Linking.openURL('tel:08514244944')
-              },
-              {
-                label: 'WhatsApp', icon: 'logo-whatsapp', value: '+91 6300281504',
-                action: () => Linking.openURL(`https://wa.me/${WHATSAPP}`)
-              },
-              { label: 'Mon–Sat', icon: 'time', value: '10AM – 9PM' },
-              { label: 'Sunday', icon: 'time', value: '10AM – 3PM' },
-            ].map((r, i) => (
-              <TouchableOpacity
-                key={i} style={s.storeRow}
-                onPress={r.action}
-                disabled={!r.action}
-              >
-                <View style={s.storeRowLeft}>
-                  <Ionicons name={r.icon} size={16} color="#C9A84C" style={{ width: 22 }} />
-                  <Text style={s.storeRowLabel}>{r.label}</Text>
-                </View>
-                <Text style={[s.storeRowValue, r.action && { color: '#4ADE80' }]}>
-                  {r.value}
-                </Text>
-              </TouchableOpacity>
-            ))}
-            </View>
-
-            {/* MORE SERVICES */}
-            <View style={s.servicesCard}>
-              <Text style={s.servicesTitle}>OUR SERVICES</Text>
-              {[
-                { icon: 'build', label: 'Bike Health Check', sub: 'Free diagnosis for your bike', action: () => setShowBikeHealth(true) },
-                { icon: 'location', label: 'Find Us on Map', sub: 'Telugu Peta, Nandyal', action: () => Linking.openURL('https://maps.google.com/?q=New+Rahul+Auto+Spares+Nandyal') },
-                { icon: 'chatbubble', label: 'WhatsApp Support', sub: 'Chat with us anytime', action: () => openStaffPicker('Hi, I need help with spare parts') },
-                { icon: 'star', label: 'Rate Our App', sub: 'Share your feedback', action: () => {} },
-              ].map((item, i) => (
-                <TouchableOpacity key={i} style={s.serviceRow} onPress={item.action}>
-                  <View style={s.serviceIconBox}>
-                    <Ionicons name={item.icon} size={20} color="#C9A84C" />
-                  </View>
-                  <View style={{ flex: 1 }}>
-                    <Text style={s.serviceLabel}>{item.label}</Text>
-                    <Text style={s.serviceSub}>{item.sub}</Text>
-                  </View>
-                  <Ionicons name="chevron-forward" size={16} color="rgba(255,255,255,0.3)" />
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View style={{ height: 30 }} />
-          </ScrollView>
-        )}
       </View>
 
       {/* BOTTOM NAV */}
@@ -2034,7 +1947,10 @@ export default function MainApp({
 
       <BottomNav
         active={tab}
-        onChange={setTab}
+        onChange={(id) => {
+          if (id === 'profile') { setShowProfile(true); return; }
+          setTab(id);
+        }}
         cartCount={cartCount}
         notifCount={unread}
       />

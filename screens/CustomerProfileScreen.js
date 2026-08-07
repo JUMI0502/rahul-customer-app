@@ -19,7 +19,7 @@ const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
 const PROFILE_KEY = 'customer_profile';
 const WHATSAPP = '916300281504';
 
-export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints, onBack, onLogout, onNavigateToOrders, onNavigateToRewards }) {
+export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints, onBack, onLogout, onNavigateToOrders, onNavigateToRewards, onNavigateToBikeHealth }) {
 
   // ── PROFILE STATE ──
   const [name, setName]           = useState(customer?.name || '');
@@ -252,6 +252,14 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
           </TouchableOpacity>
           <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => onNavigateToBikeHealth && onNavigateToBikeHealth()}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="build-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>Bike Health Check</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
           <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
             `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(
               `Hi! I'm ${name || customer?.name}, referring a friend to New Rahul Auto Spares. My number: ${phone || customer?.phone}`
@@ -275,6 +283,16 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           </TouchableOpacity>
           <View style={s.menuDivider} />
           <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
+            'https://maps.google.com/?q=New+Rahul+Auto+Spares+Nandyal'
+          )}>
+            <View style={s.menuRowLeft}>
+              <Ionicons name="location-outline" size={20} color="#C9A84C" />
+              <Text style={s.menuRowText}>Find Us on Map</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
+          </TouchableOpacity>
+          <View style={s.menuDivider} />
+          <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
             'https://rahul-auto-spares-backend.onrender.com/privacy-policy'
           )}>
             <View style={s.menuRowLeft}>
@@ -286,16 +304,29 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
         </View>
 
         {/* ── VISIT OUR STORE ── */}
-        <TouchableOpacity style={s.storeCard} onPress={() => Linking.openURL('tel:08514244944')}>
-          <View style={s.storeCardIcon}>
-            <Ionicons name="storefront-outline" size={22} color="#C9A84C" />
+        <View style={s.storeCard}>
+          <View style={{ alignItems: 'center', marginBottom: 12 }}>
+            <View style={s.storeCardIcon}>
+              <Ionicons name="storefront" size={24} color="#C9A84C" />
+            </View>
+            <Text style={[s.storeCardTitle, { marginTop: 8, fontSize: 16 }]}>New Rahul Auto Spares</Text>
+            <Text style={s.storeCardSub}>Telugu Peta, Nandyal · 518501</Text>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text style={s.storeCardTitle}>New Rahul Auto Spares</Text>
-            <Text style={s.storeCardSub}>Telugu Peta, Nandyal • Tap to call</Text>
-          </View>
-          <Ionicons name="call-outline" size={20} color="#C9A84C" />
-        </TouchableOpacity>
+          {[
+            { label: 'Phone', icon: 'call', value: '08514-244944', action: () => Linking.openURL('tel:08514244944') },
+            { label: 'WhatsApp', icon: 'logo-whatsapp', value: '+91 6300281504', action: () => Linking.openURL(`https://wa.me/${WHATSAPP}`) },
+            { label: 'Mon\u2013Sat', icon: 'time', value: '10AM \u2013 9PM' },
+            { label: 'Sunday', icon: 'time', value: '10AM \u2013 3PM' },
+          ].map((r, i) => (
+            <TouchableOpacity key={i} style={s.storeInfoRow} onPress={r.action} disabled={!r.action}>
+              <View style={s.storeRowLeft}>
+                <Ionicons name={r.icon} size={16} color="#C9A84C" style={{ width: 22 }} />
+                <Text style={s.storeRowLabel}>{r.label}</Text>
+              </View>
+              <Text style={[s.storeRowValue, r.action && { color: '#4ADE80' }]}>{r.value}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
 
         {/* ── PERSONAL DETAILS ── */}
         <View style={s.card}>
@@ -614,6 +645,13 @@ const s = StyleSheet.create({
   },
   storeCardTitle: { fontSize: 14, fontWeight: '700', color: '#fff', marginBottom: 2 },
   storeCardSub: { fontSize: 12, color: 'rgba(255,255,255,0.5)' },
+  storeInfoRow: {
+    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
+    paddingVertical: 10, borderTopWidth: 1, borderTopColor: 'rgba(255,255,255,0.06)',
+  },
+  storeRowLeft: { flexDirection: 'row', alignItems: 'center', gap: 8, flex: 1 },
+  storeRowLabel: { fontSize: 13, color: 'rgba(255,255,255,0.5)' },
+  storeRowValue: { fontSize: 13, color: '#fff', fontWeight: '600' },
   avatarImage: { width: 72, height: 72, borderRadius: 36 },
   avatarEditBadge: {
     position: 'absolute', bottom: 0, right: 0,
