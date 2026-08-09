@@ -314,6 +314,18 @@ export default function MainApp({
   }, [vehicle]);
 
   const loadProducts = async () => {
+    // Stale-while-revalidate: show cached products instantly (if we have
+    // any) so the screen never sits on a blank loading spinner when the
+    // person already has data from a previous visit, then silently
+    // refresh from the network in the background.
+    try {
+      const cached = await AsyncStorage.getItem(PRODUCTS_KEY);
+      if (cached) {
+        setProducts(JSON.parse(cached));
+        setLoading(false);
+      }
+    } catch {}
+
     try {
       const r = await fetch(`${API_URL}/products`);
       const d = await r.json();
