@@ -141,25 +141,39 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
       const merged = { ...existingData, ...profile };
       await AsyncStorage.setItem(PROFILE_KEY, JSON.stringify(merged));
 
-      // Save to backend
-      await fetch(`${API_URL}/customers/profile`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: profile.name,
-          phone: profile.phone,
-          email: profile.email,
-          address: profile.address,
-          city: profile.city,
-          pincode: profile.pincode,
-          upi_id: profile.upiId,
-          whatsapp: profile.whatsapp,
-        }),
-      }).catch(() => {}); // silent fail — local save is enough
+      // Save to backend - properly checked now, so a real failure here
+      // (as opposed to the local save above) is visible rather than silent.
+      let backendSynced = true;
+      try {
+        const r = await fetch(`${API_URL}/customers/profile`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: profile.name,
+            phone: profile.phone,
+            email: profile.email,
+            address: profile.address,
+            city: profile.city,
+            pincode: profile.pincode,
+            upi_id: profile.upiId,
+            whatsapp: profile.whatsapp,
+          }),
+        });
+        if (!r.ok) backendSynced = false;
+      } catch {
+        backendSynced = false;
+      }
 
       Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       setEditing(false);
-      Alert.alert('Saved!', 'Your profile has been updated.');
+      if (backendSynced) {
+        Alert.alert('Saved!', 'Your profile has been updated.');
+      } else {
+        Alert.alert(
+          'Saved on this device',
+          'Your details are saved here, but we could not sync to our servers right now. Please check your connection and try again shortly.'
+        );
+      }
     } catch {
       Alert.alert('Error', 'Could not save profile. Try again.');
     }
