@@ -147,7 +147,7 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
       try {
         const r = await fetch(`${API_URL}/customers/profile`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-session-token': customer?.sessionToken || '' },
           body: JSON.stringify({
             name: profile.name,
             phone: profile.phone,
