@@ -342,7 +342,9 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
           ))}
         </View>
 
-        {/* ── PERSONAL DETAILS ── */}
+        {/* ── PERSONAL DETAILS (only shown while editing, to keep the default view short) ── */}
+        {editing && (
+        <>
         <View style={s.card}>
           <Text style={s.cardTitle}>Personal Details</Text>
 
@@ -555,6 +557,8 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             <Text style={s.actionArrow}>→</Text>
           </TouchableOpacity>
         </View>
+        </>
+        )}
 
         {/* LOGOUT */}
         <TouchableOpacity style={s.logoutBtn}
