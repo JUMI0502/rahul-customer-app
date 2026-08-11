@@ -705,31 +705,31 @@ export default function MainApp({
 
   const QUICK_ACTIONS = [  // Professional icon labels
     {
-      icon: 'search', label: 'Browse Parts',
+      icon: 'search', label: 'Browse Parts', sub: 'Find parts for your bike',
       labelTe: 'పార్ట్స్ చూడండి',
       color: '#C9A84C', bg: 'rgba(201,168,76,0.15)',
       action: () => setTab('browse')
     },
     {
-      icon: 'receipt-outline', label: 'Track Orders',
+      icon: 'receipt-outline', label: 'Track Orders', sub: 'See your order history',
       labelTe: 'ఆర్డర్ ట్రాక్',
       color: '#4ADE80', bg: 'rgba(74,222,128,0.15)',
       action: () => setTab('orders')
     },
     {
-      icon: 'build', label: 'Bike Health',
+      icon: 'build', label: 'Bike Health', sub: 'Free diagnosis for your bike',
       labelTe: 'బైక్ హెల్త్',
       color: '#FFC107', bg: 'rgba(255,193,7,0.15)',
       action: () => setShowBikeHealth(true)
     },
     {
-      icon: 'bookmark-outline', label: 'Saved Parts',
+      icon: 'bookmark-outline', label: 'Saved Parts', sub: 'Your bookmarked items',
       labelTe: 'సేవ్ చేసినవి',
       color: '#EF4444', bg: 'rgba(239,68,68,0.15)',
       action: () => setTab('favorites')
     },
     {
-      icon: 'chatbubble-ellipses-outline', label: 'WhatsApp Us',
+      icon: 'chatbubble-ellipses-outline', label: 'WhatsApp Us', sub: 'Chat with us directly',
       labelTe: 'వాట్సాప్',
       color: '#25D366', bg: 'rgba(37,211,102,0.15)',
       action: () => Linking.openURL(`https://wa.me/${WHATSAPP}?text=Hi! I need help with spare parts`)
@@ -1079,34 +1079,30 @@ export default function MainApp({
               </View>
             )}
 
-            {/* QUICK ACTIONS — 6 GRID */}
-            <View style={s.qaSection}>
-              <Text style={s.qaSectionTitle}>QUICK ACTIONS</Text>
-              <View style={s.qaGrid}>
-                {QUICK_ACTIONS.map((a, i) => (
+            {/* QUICK ACTIONS — CLEAN LIST ROWS */}
+            <View style={s.qaListCard}>
+              {QUICK_ACTIONS.map((a, i) => (
+                <View key={i}>
                   <TouchableOpacity
-                    key={i}
-                    style={s.qaCard}
+                    style={s.qaRow}
                     onPress={() => {
-                      Haptics.impactAsync(
-                        Haptics.ImpactFeedbackStyle.Light
-                      );
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                       a.action();
                     }}
-                    activeOpacity={0.8}
+                    activeOpacity={0.7}
                   >
-                    <View style={[s.qaIconBox,
-                      { backgroundColor: a.bg }]}>
-                      <Ionicons name={a.icon} size={24} color={a.color} />
+                    <View style={[s.qaRowIconBox, { backgroundColor: a.bg }]}>
+                      <Ionicons name={a.icon} size={22} color={a.color} />
                     </View>
-                    <Text style={[s.qaLabel,
-                      { color: a.color }]}>
-                      {a.label}
-                    </Text>
-                    <Text style={s.qaLabelTe}>{a.labelTe}</Text>
+                    <View style={{ flex: 1 }}>
+                      <Text style={s.qaRowLabel}>{a.label}</Text>
+                      <Text style={s.qaRowSub}>{a.sub}</Text>
+                    </View>
+                    <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
                   </TouchableOpacity>
-                ))}
-              </View>
+                  {i < QUICK_ACTIONS.length - 1 && <View style={s.qaRowDivider} />}
+                </View>
+              ))}
             </View>
 
 
@@ -2760,6 +2756,22 @@ const s = StyleSheet.create({
   offerBadge: { backgroundColor: '#FFC107', borderRadius: 6, paddingHorizontal: 6, paddingVertical: 2, marginTop: 4, alignSelf: 'flex-start' },
   offerBadgeText: { fontSize: 10, color: '#06060E', fontWeight: 'bold' },
   qaSection: { paddingHorizontal: 16, marginBottom: 4 },
+  qaListCard: {
+    marginHorizontal: 16, marginBottom: 14,
+    backgroundColor: '#0D1F3C', borderRadius: 16,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.08)', overflow: 'hidden',
+  },
+  qaRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 12,
+    paddingHorizontal: 14, paddingVertical: 12,
+  },
+  qaRowIconBox: {
+    width: 40, height: 40, borderRadius: 12,
+    alignItems: 'center', justifyContent: 'center',
+  },
+  qaRowLabel: { fontSize: 14, fontWeight: '700', color: '#fff', marginBottom: 2 },
+  qaRowSub: { fontSize: 11, color: 'rgba(255,255,255,0.4)' },
+  qaRowDivider: { height: 1, backgroundColor: 'rgba(255,255,255,0.06)', marginLeft: 66 },
   qaSectionTitle: { fontSize: 13, color: 'rgba(255,255,255,0.4)', letterSpacing: 2, marginBottom: 12, textTransform: 'uppercase' },
   qaGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 16 },
   qaCard: { width: (width - 52) / 3, backgroundColor: '#0D1F3C', borderRadius: 12, padding: 14, alignItems: 'center', gap: 8, borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)' },
