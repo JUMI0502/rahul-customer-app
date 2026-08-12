@@ -325,7 +325,7 @@ export default function MainApp({
             try {
               const r = await fetch(`${API_URL}/loyalty/${customer?.phone}/redeem-reward`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'x-session-token': customer?.sessionToken || '' },
                 body: JSON.stringify({ reward_id: reward.id, points: reward.points_required })
               });
               const d = await r.json();
