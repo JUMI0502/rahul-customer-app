@@ -14,12 +14,36 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
 const PROFILE_KEY = 'customer_profile';
 const WHATSAPP = '916300281504';
 
 export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints, onBack, onLogout, onNavigateToOrders, onNavigateToRewards, onNavigateToBikeHealth }) {
+  const [biometricSupported, setBiometricSupported] = useState(false);
+  const [biometricEnabled, setBiometricEnabled] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const hasHardware = await LocalAuthentication.hasHardwareAsync();
+      const isEnrolled = await LocalAuthentication.isEnrolledAsync();
+      setBiometricSupported(hasHardware && isEnrolled);
+      const saved = await AsyncStorage.getItem('biometric_lock_enabled');
+      setBiometricEnabled(saved === 'true');
+    })();
+  }, []);
+
+  const toggleBiometric = async (value) => {
+    if (value) {
+      const result = await LocalAuthentication.authenticateAsync({
+        promptMessage: 'Confirm to enable Face ID / Fingerprint lock',
+      });
+      if (!result.success) return;
+    }
+    await AsyncStorage.setItem('biometric_lock_enabled', value ? 'true' : 'false');
+    setBiometricEnabled(value);
+  };
 
   // ── PROFILE STATE ──
   const [name, setName]           = useState(customer?.name || '');
@@ -295,6 +319,23 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
             </View>
             <Ionicons name="chevron-forward" size={18} color="rgba(255,255,255,0.3)" />
           </TouchableOpacity>
+          {biometricSupported && (
+            <>
+              <View style={s.menuDivider} />
+              <View style={s.menuRow}>
+                <View style={s.menuRowLeft}>
+                  <Ionicons name="finger-print-outline" size={20} color="#C9A84C" />
+                  <Text style={s.menuRowText}>App Lock (Face ID / Fingerprint)</Text>
+                </View>
+                <Switch
+                  value={biometricEnabled}
+                  onValueChange={toggleBiometric}
+                  trackColor={{ false: 'rgba(255,255,255,0.15)', true: '#C9A84C' }}
+                  thumbColor="#fff"
+                />
+              </View>
+            </>
+          )}
           <View style={s.menuDivider} />
           <TouchableOpacity style={s.menuRow} onPress={() => Linking.openURL(
             'https://maps.google.com/?q=New+Rahul+Auto+Spares+Nandyal'

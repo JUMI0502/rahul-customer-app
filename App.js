@@ -7,6 +7,7 @@ import { StatusBar } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import VehicleSelectScreen from './screens/VehicleSelectScreen';
 import MainApp from './screens/MainApp';
+import BiometricLockScreen from './screens/BiometricLockScreen';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -103,6 +104,8 @@ export default Sentry.wrap(function App() {
       const savedVehicles = await AsyncStorage.getItem('vehicles_list');
       const savedMechanic = await AsyncStorage.getItem('mechanic_profile');
 
+      const biometricEnabled = await AsyncStorage.getItem('biometric_lock_enabled');
+
       if (savedMechanic) {
         const m = JSON.parse(savedMechanic);
         if (m.status === 'approved') {
@@ -110,7 +113,7 @@ export default Sentry.wrap(function App() {
           setIsMechanic(true);
           if (savedVehicle) setVehicle(JSON.parse(savedVehicle));
           if (savedVehicles) setVehicles(JSON.parse(savedVehicles));
-          setScreen('main');
+          setScreen(biometricEnabled === 'true' ? 'biometric-lock' : 'main');
           registerForPushNotifications(m.phone);
         } else {
           setScreen('login');
@@ -120,7 +123,7 @@ export default Sentry.wrap(function App() {
         setCustomer(parsedCustomer);
         if (savedVehicle) setVehicle(JSON.parse(savedVehicle));
         if (savedVehicles) setVehicles(JSON.parse(savedVehicles));
-        setScreen('main');
+        setScreen(biometricEnabled === 'true' ? 'biometric-lock' : 'main');
         registerForPushNotifications(parsedCustomer.phone);
       } else {
         setScreen('login');
@@ -195,6 +198,15 @@ export default Sentry.wrap(function App() {
         <Text style={s.loadingBrand}>New Rahul Auto Spares</Text>
         <Text style={s.loadingLocation}>Telugu Peta, Nandyal</Text>
       </LinearGradient>
+    );
+  }
+
+  if (screen === 'biometric-lock') {
+    return (
+      <BiometricLockScreen
+        onUnlock={() => setScreen('main')}
+        onUsePinInstead={() => setScreen('login')}
+      />
     );
   }
 
