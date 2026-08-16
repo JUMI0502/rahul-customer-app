@@ -14,6 +14,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from 'expo-haptics';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width } = Dimensions.get('window');
 const API_URL = 'https://rahul-auto-spares-backend.onrender.com';
@@ -175,9 +176,13 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
           <View style={s.hero}>
             {/* Shield Logo */}
             <View style={s.shieldWrap}>
-              <View style={s.shield}>
+              <LinearGradient
+                colors={['#E8C874', '#C9A84C', '#8A6D2F']}
+                start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}
+                style={s.shield}>
+                <Ionicons name="storefront" size={30} color="#07111F" />
                 <Text style={s.shieldRAS}>RAS</Text>
-              </View>
+              </LinearGradient>
             </View>
             <Text style={s.heroTagline}>YOUR TRUSTED SPARES PARTNER</Text>
             <Text style={s.heroName}>New Rahul Auto Spares</Text>
@@ -213,13 +218,6 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               <Text style={s.roleTitle}>Customer</Text>
               <Text style={s.roleSub}>Browse · Order · Track</Text>
               <Text style={s.roleTe}>స్పేర్ పార్ట్స్ కొనండి</Text>
-              <View style={s.roleTagRow}>
-                {['Free Account', 'All Bikes', 'Fast Pickup'].map((tag, i) => (
-                  <View key={i} style={[s.roleTag, { backgroundColor: 'rgba(201,168,76,0.1)' }]}>
-                    <Text style={[s.roleTagText, { color: '#C9A84C' }]}>{tag}</Text>
-                  </View>
-                ))}
-              </View>
             </View>
             <View style={s.roleArrow}>
               <Ionicons name="chevron-forward" size={18} color="#C9A84C" />
@@ -240,22 +238,6 @@ export default function LoginScreen({ onCustomerLogin, onMechanicLogin, onMechan
               <Ionicons name="chevron-forward" size={18} color="#FFC107" />
             </View>
           </TouchableOpacity>
-
-          {/* STORE INFO */}
-          <View style={s.storeInfoBox}>
-            <View style={s.storeInfoRow}>
-              <Ionicons name="time-outline" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
-              <Text style={s.storeInfoText}>Mon–Sat: 10AM–9PM · Sun: 10AM–3PM</Text>
-            </View>
-            <View style={s.storeInfoRow}>
-              <Ionicons name="call-outline" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
-              <Text style={s.storeInfoText}>08514-244944</Text>
-            </View>
-            <View style={s.storeInfoRow}>
-              <Ionicons name="logo-whatsapp" size={16} color="rgba(255,255,255,0.4)" style={s.storeInfoIcon} />
-              <Text style={s.storeInfoText}>WhatsApp: +91 6300281504</Text>
-            </View>
-          </View>
 
           <View style={{ height: 30 }} />
         </ScrollView>
