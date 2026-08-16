@@ -103,7 +103,10 @@ export default function CustomerProfileScreen({ customer, vehicle, loyaltyPoints
 
   const fetchOrderStats = async () => {
     try {
-      const r = await fetch(`${API_URL}/orders/customer/${customer?.phone}`);
+      const r = await fetch(
+        `${API_URL}/orders/customer/${customer?.phone}`,
+        { headers: { 'x-session-token': customer?.sessionToken || '' } }
+      );
       const d = await r.json();
       const orders = d.orders || [];
       setOrderCount(orders.length);
