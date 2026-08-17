@@ -42,7 +42,6 @@
   },
   "private": true,
   "devDependencies": {
-    "canvas": "^3.2.3",
     "jest": "~29.7.0",
     "jest-expo": "~54.0.17"
   }
