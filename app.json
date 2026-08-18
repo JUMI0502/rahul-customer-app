@@ -26,7 +26,6 @@
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
       ],
-      "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json"
     },
     "runtimeVersion": {
@@ -51,7 +50,8 @@
           "organization": "rahul-auto-spares"
         }
       ],
-      "expo-font"
+      "expo-font",
+      "@sentry/react-native"
     ],
     "icon": "./assets/icon.png",
     "ios": {
